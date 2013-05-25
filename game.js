@@ -4,6 +4,7 @@ function game()
 	this.squareHeight = 50;
 	this.windowWidth = 0;
 	this.windowHeight = 0;
+	this.score = 0;
 	this.grid = new gameGrid(this);
 	this.ctx = $('#gameCanvas')[0].getContext('2d');
 }
