@@ -15,7 +15,13 @@ game.prototype.update = function()
 
 game.prototype.drawGridSquare = function(i, j)
 {
-	this.ctx.fillRect(i * this.squareWidth, j * this.squareHeight, this.squareWidth - 1, this.squareHeight - 1);
+	var coordX = i * this.squareWidth;
+	var coordY = j * this.squareHeight;
+	this.ctx.font="40px sans-serif";
+	this.ctx.fillStyle = "#000000";
+	this.ctx.fillRect(coordX, coordY, this.squareWidth - 1, this.squareHeight - 1);
+	this.ctx.fillStyle = "#FFFFFF";
+	this.ctx.fillText(this.grid.squares[i + j * this.grid.height].letter, coordX, coordY);
 }
 
 game.prototype.drawGrid = function()
