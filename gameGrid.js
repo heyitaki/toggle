@@ -47,7 +47,7 @@ gameGrid.prototype.generateGrid = function()
 		}
 
 		percentVowels = amountOfVowels / (amountOfVowels + amountOfConsonants);
-		if (percentVowels < 0.2)
+		if (percentVowels < 0.4)
 		{
 			nextIsVowel = true;
 		}

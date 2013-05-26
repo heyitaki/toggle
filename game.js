@@ -22,6 +22,7 @@ function game()
 game.prototype.update = function()
 {
 	this.input.update();
+	tetris();
 };
 
 game.prototype.draw = function()
@@ -69,7 +70,8 @@ game.prototype.clearWord = function()
 }
 
 game.prototype.updateScore = function()
-{	if (this.isWord())
+{	
+	if (this.isWord())
 	{
 		for (var i = 0; i < this.word.length; i++)
 		{

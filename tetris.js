@@ -55,10 +55,10 @@ function createNextBlock()
     }    
     else if (i == 2) //I
     {
-        subField[1][0].hasTetris = true;
-        subField[1][1].hasTetris = true;
-        subField[1][2].hasTetris = true;
-        subField[1][3].hasTetris = true;
+        subField[3][0].hasTetris = true;
+        subField[3][1].hasTetris = true;
+        subField[3][2].hasTetris = true;
+        subField[3][3].hasTetris = true;
     }
     else if (i == 3) //T
     {
@@ -122,7 +122,7 @@ function collidesWithWalls(direction)
 	{
 		for(var k = 0; k < 4; k++)
 		{
-				if (position.x + direction < leftestIndex() - 1|| position.x + direction > mainGame.grid.width - rightestIndex() - 1)
+				if (position.x + direction < leftestIndex() - 1|| position.x + direction > rightestIndex() - 1)
 					return true;
 		}
 	}
@@ -141,7 +141,6 @@ function moveRight()
 				validMove = false;
 			if (collision(1))
 			{
-				place();
 				validMove = false;
 			}
 	
@@ -172,7 +171,7 @@ function place()
 
 function leftestIndex()
 {
-	var leftest = 4;
+	var leftest = 3;
 	for (var i = 0; i < 4; i++)
 	{
 		for (var j = 0; j < 4; j++)
@@ -186,7 +185,7 @@ function leftestIndex()
 
 function rightestIndex()
 {
-	var rightest = 0;
+	var rightest = 8;
 	for (var i = 0; i < 4; i++)
 	{
 		for (var j = 0; j < 4; j++)
@@ -223,7 +222,6 @@ function moveLeft()
 				validMove = false;
 			else if (collision(-1))
 			{
-				place();
 				validMove = false;
 			}
 	
@@ -255,6 +253,60 @@ function naturalFall()
 			place();
 		this.position.y++;
 	}
+}
+
+function tetris()
+{
+	var startSquares = [];
+	var isTetris;
+	var rowTetris;
+	
+	for(var i = 0; i < mainGame.grid.squares.length; i++)
+	{
+		if(i % mainGame.grid.width == 0)
+		{
+			startSquares.push(mainGame.grid.squares[i]);
+		}
+	}
+
+	for(var i = 0; i < startSquares.length; i++)
+	{
+		isTetris = true;
+		for(var j = 0; j < mainGame.grid.width; j++)
+		{
+			if(!mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
+			{
+				isTetris = false;
+			}
+		}
+		if(isTetris)
+		{
+			rowTetris = i;
+		}
+	}
+	if(isTetris)
+	{
+		for(var j = 0; j < mainGame.grid.width; j++)
+		{
+			mainGame.grid.squares[rowTetris * mainGame.grid.width + j].hasTetris = false;
+		}
+		
+
+		for(var i = rowTetris - 1; i >= 0; i--)
+		{
+			for(var j = 0; j < mainGame.grid.width; j++)
+			{
+				if(mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
+				{
+					mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris = false;
+					mainGame.grid.squares[(i + 1) * mainGame.grid.width + j].hasTetris = true;
+				}
+			}
+		}
+		mainGame.score += 40;
+		$('#score').html(mainGame.score);	
+	}
+
 }
 
 function rotateClockwise()
