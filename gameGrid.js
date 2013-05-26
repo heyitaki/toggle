@@ -103,11 +103,11 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.font="30px sans-serif";
 			ctx.textAllign = "center";
 			
-			if (!square.isSelected)
+			if (square.isSelected)
 			{	
 				ctx.fillStyle = square.color;
 			}
-			else if (!square.hasTetris)
+			if (square.hasTetris)
 			{
 				ctx.fillStyle = '#000000';
 			}
