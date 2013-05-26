@@ -14,7 +14,8 @@ jQuery(function($)
 	
 	$(window).mousemove(function(e)
 	{
-		mainGame.handleMouseInput(e.clientX, e.clientY);	
+		mainGame.handleMouseInput(e.clientX, e.clientY);
+		console.log(mainGame.word);	
 	});
 
 	$(window).mouseup(function(e)
@@ -38,6 +39,11 @@ jQuery(function($)
 		if (e.which == 83)
 		{
 			naturalFall();
+		}
+		if (e.which == 81)
+		{
+			clearField();
+			rotateClockwise();
 		}
 	});
 

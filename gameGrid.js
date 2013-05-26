@@ -13,21 +13,43 @@ function gameGrid(theGame)
 			this.squares[i + j * this.height] = new gameSquare(i + j * this.height);
 		}
 	}
+
+	this.generateGrid();
 }
 
 gameGrid.prototype.generateGrid = function()
 {
+	var amountOfVowels = 0;
+	var amountOfConsonants = 0;
+	var percentVowels = 0;
+	var nextIsVowel = false;
+
 	for (var i = 0; i < this.squares.length; i++)
 	{
-		this.squares[i].letter = this.randChar();
-	}
+		var newChar = this.randChar();
+		if (nextIsVowel)
+		{
+			newChar = this.randVowel();
+			nextIsVowel = false;
+		}
+	
+		this.squares[i].letter = newChar;
 
-	do
-	{
-		var numberOfVowels = this.numberOfOccurances('A') + this.numberOfOccurances('E') + this.numberOfOccurances('I') + this.numberOfOccurances('O') + this.numberOfOccurances('U');
-		var fractionOfVowels = numberOfVowels / (this.width * this.height);
-		this.getRandomSquare().letter = this.randVowel();
-	} while(fractionOfVowels < 0.5)
+		if (this.isVowel(newChar))
+		{
+			amountOfVowels++;
+		}
+		else
+		{
+			amountOfConsonants++;
+		}
+
+		percentVowels = amountOfVowels / (amountOfVowels + amountOfConsonants);
+		if (percentVowels < 0.2)
+		{
+			nextIsVowel = true;
+		}
+	}
 	
 };
 
@@ -104,14 +126,15 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.textAllign = "center";
 			
 			var special = false;
-			if (square.isSelected)
-			{	
-				ctx.fillStyle = square.selectedColor;
-				special = true;
-			}
+		
 			if (square.hasTetris)
 			{
 				ctx.fillStyle = '#000000';
+				special = true;
+			}
+			if (square.isSelected)
+			{	
+				ctx.fillStyle = square.selectedColor;
 				special = true;
 			}
 			if (!special) 
@@ -141,7 +164,7 @@ gameGrid.prototype.numberOfOccurances = function(let)
 
 gameGrid.prototype.randChar = function()
 {
-	String.fromCharCode(Math.floor((Math.random() * 26) + 1) + 64);
+	return String.fromCharCode(Math.floor((Math.random() * 26) + 1) + 64);
 };
 
 gameGrid.prototype.getSquareIndex = function(x, y)
