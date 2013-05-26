@@ -72,7 +72,6 @@ gameGrid.prototype.getSquare = function(x, y)
 gameGrid.prototype.selectSquare = function(x, y)
 {
 	this.getSquare(x, y).isSelected = true;
-	this.getSquare(x, y).letter = 'Z';
 }
 
 gameGrid.prototype.clearSelected = function()
@@ -80,7 +79,6 @@ gameGrid.prototype.clearSelected = function()
 	for (var i = 0; i < this.squares.length; i++)
 	{
 		this.squares[i].isSelected = false;
-		this.squares[i].letter = 'A';
 	}
 }
 
