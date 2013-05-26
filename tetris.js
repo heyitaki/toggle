@@ -147,9 +147,23 @@ function collision(direction)
 		{
 			if (subField[j][k].hasTetris == true)
 			{
-				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris || position.x + direction < leftestIndex() - 1 || position.x + direction > mainGame.grid.width - rightestIndex() - 1)
+				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris)
 					return true;
 			}
+		}
+	}
+
+	return false;
+}
+
+function collidesWithWalls(direction)
+{
+	for (var j = 0; j < 4; j++)
+	{
+		for(var k = 0; k < 4; k++)
+		{
+				if (position.x + direction < leftestIndex() - 1|| position.x + direction > mainGame.grid.width - rightestIndex() - 1)
+					return true;
 		}
 	}
 
@@ -163,8 +177,10 @@ function moveRight()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision(1) || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
+			if (collidesWithWalls(1))
 				validMove = false;
+			else if (collision())
+				place();
 		}
 	}
 
@@ -179,7 +195,17 @@ function moveRight()
 
 function place()
 {
-
+		for (var i = 0; i < 4; i++)
+		{
+			for (var j = 0; j < 4; j++)
+			{
+				this.mainGame.grid.squares[(position.y + i) + (position.x + j) * this.mainGame.grid.width].hasTetris = subField.hasTetris;
+			}
+		}
+		intializeBlockArray();
+		position.x = 0;
+		position.y = 0;
+		createNextBlock();
 }
 
 function leftestIndex()
@@ -212,7 +238,7 @@ function rightestIndex()
 
 function bottomIndex()
 {
-	var bottomest = 0;
+	var bottomest = 4;
 	for (var i = 0; i < 4; i++)
 	{
 		for (var j = 0; j < 4; j++)
@@ -221,7 +247,7 @@ function bottomIndex()
 				bottomest = j;
 		}
 	}
-	return bottomest;
+	return bottomest + position.y - 1;
 }
 
 function moveLeft()
@@ -231,8 +257,10 @@ function moveLeft()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision(-1))
+			if (collidesWithWalls(-1))
 				validMove = false;
+			else if (collision())
+				place();
 		}
 	}
 
@@ -252,8 +280,7 @@ function naturalFall()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision() == true)
-				validMove = false;
+			
 		}
 	}
     if (validMove == true)
@@ -266,6 +293,8 @@ function naturalFall()
 	if (validMove == true)
 	{
 		position.y = position.y + 1;
+		if (bottomIndex() > mainGame.grid.height - 1)
+			place();
 		writeState(position.x, position.y);
 	}
 	else

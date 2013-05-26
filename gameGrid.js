@@ -109,7 +109,7 @@ gameGrid.prototype.draw = function(ctx)
 			}
 			else if (!square.hasTetris)
 			{
-				ctx.fillStyle = square.tetrisColor;
+				ctx.fillStyle = '#000000';
 			}
 			else 
 			{

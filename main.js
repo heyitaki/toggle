@@ -40,6 +40,9 @@ jQuery(function($)
 	});
 
 	mainGame.setUpCanvas();	
-	setInterval(naturalFall, 4000);	
+	setInterval(function()
+	{
+		naturalFall();
+	}, 1000);	
 	setInterval(tick, 2);
 });
