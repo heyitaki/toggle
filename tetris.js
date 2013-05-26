@@ -8,7 +8,6 @@ var position = {
 	y: 0,
 };
 
-//MY STUFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 function intializeBlockArray()
 {
 	//4x4 array
@@ -23,7 +22,6 @@ function intializeBlockArray()
 		for(var k = 0; k < 4; k++)
 		{
 			subField[j][k] = new gameSquare();
-			//mainGame.grid.squares[(mainGame.grid.width / 2) - 2 + j][mainGame.grid.squares[0]] = subField[j][k];
 		}
 	}
 
@@ -149,13 +147,13 @@ function collision()
 		{
 			if (subField[j][k].hasTetris == true)
 			{
-				if (mainGame.grid[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris)
+				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris)
 					return true;
-				else
-					return false;
 			}
 		}
 	}
+
+	return false;
 }
 
 function moveRight()
@@ -165,7 +163,7 @@ function moveRight()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (subField.collision(position.x, position.y) == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
+			if (collision(position.x, position.y) || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
 				validMove = false;
 		}
 	}
@@ -173,10 +171,10 @@ function moveRight()
 	if (validMove == true)
 	{
 		position.x = position.x + 1;
-		subField.writeState(position.x, position.y);
+		writeState(position.x, position.y);
 	}
 	else
-		subField.revertState();
+		revertState();
 }
 
 function moveLeft()
@@ -186,7 +184,7 @@ function moveLeft()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (subField.collision() == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) > 0)
+			if (collision() == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) > 0)
 				validMove = false;
 		}
 	}
@@ -194,10 +192,10 @@ function moveLeft()
 	if (validMove == true)
 	{
 		position.x = position.x - 1;
-		subField.writeState(position.x, position.y);
+		writeState(position.x, position.y);
 	}
 	else
-		subField.revertState();
+		revertState();
 }
 
 function naturalFall()
@@ -207,24 +205,24 @@ function naturalFall()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (subField.collision() == true)
+			if (collision() == true)
 				validMove = false;
 		}
 	}
     if (validMove == true)
     {
-        subField.writeState(x, y + 1);
+        writeState(x, y + 1);
     }
     else
-        subField.revertState();
+        revertState();
 
 	if (validMove == true)
 	{
 		position.y = position.y + 1;
-		subField.writeState(position.x, position.y);
+		writeState(position.x, position.y);
 	}
 	else
-		subField.revertState();
+		revertState();
 }
 
 function writeState()
@@ -235,19 +233,19 @@ function writeState()
 		{
 			mainGame.grid[i + position.x  + (j + position.y) * mainGame.grid.width] = subField[i][j];
 			[position.x + (j + position.y) * mainGame.grid.width].hasTetris = false;
-			subField.saveState();
+			saveState();
 		}
 	}
 }
 
 function saveState()
 {
-	savedState = subField;
+	savedState = subField.slice(0);
 }
 
 function revertState()
 {
-	subField = savedState;
+	subField = savedState.slice(0);
 }
 
 function rotateClockwise()
@@ -677,7 +675,7 @@ function rotateClockwise()
 
 function rotateCounterClockwise()
 {
-	subField.clearField();
+	clearField();
 	if (rotation % 360 == 0)
 	{
 		if (blockType == 1)

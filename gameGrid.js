@@ -31,7 +31,7 @@ gameGrid.prototype.generateGrid = function()
 	
 };
 
-gameGrid.prototype.getRandomSquare()
+gameGrid.prototype.getRandomSquare = function()
 {
 	var rand;
 	do
@@ -42,7 +42,7 @@ gameGrid.prototype.getRandomSquare()
 	return this.squares[rand];
 }
 
-gameGrid.prototype.isVowel(var letter)
+gameGrid.prototype.isVowel = function(letter)
 {
 	if(letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U')
 	{
@@ -51,7 +51,7 @@ gameGrid.prototype.isVowel(var letter)
 	return false;
 }
 
-gameGrid.prototype.randVowel()
+gameGrid.prototype.randVowel = function()
 {
 	var rand = Math.random();
 	rand = Math.floor(rand * 5);
@@ -77,6 +77,19 @@ gameGrid.prototype.randVowel()
 	}
 };
 
+gameGrid.prototype.drawTetris = function(ctx)
+{
+	for (var i = 0; i < 4; i++)
+	{
+		for (var j = 0; j < 4; j++)
+		{
+			ctx.fillStyle = '#0000FF';
+			if (subField[i][j].hasTetris)
+			ctx.fillRect((j * this.mainGame.squareWidth) + this.borderSize, (i * this.mainGame.squareHeight) + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
+		}
+	}
+}
+
 gameGrid.prototype.draw = function(ctx)
 {
 	for (var i = 0; i < this.width; i++)
@@ -94,6 +107,10 @@ gameGrid.prototype.draw = function(ctx)
 			{	
 				ctx.fillStyle = square.color;
 			}
+			else if (!square.hasTetris)
+			{
+				ctx.fillStyle = square.tetrisColor;
+			}
 			else 
 			{
 				ctx.fillStyle = square.selectedColor;
@@ -105,6 +122,7 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.fillText(square.letter, coordX + 13, coordY + this.mainGame.squareHeight / 2 + 17);
 		}
 	}
+	this.drawTetris(ctx);
 };
 gameGrid.prototype.numberOfOccurances = function(let)
 {
@@ -170,7 +188,7 @@ gameGrid.prototype.withinBounds = function(x, y)
 
 gameGrid.prototype.checkSquare = function(index)
 {
-	return this.squares[index].hasTetris;
+	return true;//this.squares[index].hasTetris;
 }
 
 gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
@@ -213,7 +231,7 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
 	if(!this.checkSquare(currSquareIndex))
 	{
-		this.updateScore();
+		this.mainGame.updateScore();
 	  	this.mainGame.clearWord();
 		return;
 	}
@@ -232,7 +250,7 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 	}
 	else
 	{
-		this.updateScore();
+		this.mainGame.updateScore();
 		this.mainGame.clearWord();
 	}	
 }
