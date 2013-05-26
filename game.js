@@ -69,22 +69,33 @@ game.prototype.clearWord = function()
 	console.log(this.score);
 }
 
-game.prototype.isLegalWord = function(word)
-{
-	return dict.indexOf(word) != -1;
+game.prototype.updateScore = function()
+{	if (this.isWord())
+	{
+		for (var i = 0; i < this.word.length; i++)
+		{
+			var letter =this.word[i].letter;
+			var asciiCode = letter.charCodeAt(0);
+			this.score += this.alphabetPoints[asciiCode - 65];
+		}
+
+		$('#score').html(this.score);
+	}
 }
 
-game.prototype.updateScore = function()
+game.prototype.isWord = function()
 {
+	var wordString = "";
 	for (var i = 0; i < this.word.length; i++)
 	{
-		var letter =this.word[i].letter;
-		var asciiCode = letter.charCodeAt(0);
-		this.score += this.alphabetPoints[asciiCode - 65];
+		if (i == 0)
+			wordString += this.word[i].letter;
+		else
+			wordString += this.word[i].letter.toLowerCase();
 	}
-
-	$('#score').html(this.score);
+	return dict.indexOf(wordString) > -1;
 }
+
 function tick()
 {
   	if (!mainGame.input.frameMouseStates[0])
