@@ -4,7 +4,7 @@ var rotation = 0;
 var blockType = 0;
 
 var position = {
-	x: Math.floor((gameGrid.width / gameGrid.squareWidth) / 2 - 1),
+	x: 0,
 	y: 0,
 };
 
@@ -23,7 +23,7 @@ function intializeBlockArray()
 		for(var k = 0; k < 4; k++)
 		{
 			subField[j][k] = new gameSquare();
-			//gameGrid.squares[(gameGrid.width / 2) - 2 + j][gameGrid.squares[0]] = subField[j][k];
+			//mainGame.grid.squares[(mainGame.grid.width / 2) - 2 + j][mainGame.grid.squares[0]] = subField[j][k];
 		}
 	}
 
@@ -32,7 +32,6 @@ function intializeBlockArray()
 
 function createNextBlock()
 {
-<<<<<<< HEAD
     //new tetromino
     var i = Math.floor((Math.random() * 7) + 1);
     blockType = i;
@@ -86,9 +85,9 @@ function createNextBlock()
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
     }
-=======
+
 	//new tetromino
-	int i = Math.floor((Math.random() * 7) + 1);
+	var i = Math.floor((Math.random() * 7) + 1);
 	blockType = i;
 	rotation = 0;
 	if (i == 1) //O
@@ -140,7 +139,6 @@ function createNextBlock()
 		subField[2][1].hasTetris = true;
 		subField[2][2].hasTetris = true;
 	}
->>>>>>> fixed tetris errors kind of
 }
 
 function collision()
@@ -151,7 +149,7 @@ function collision()
 		{
 			if (subField[j][k].hasTetris == true)
 			{
-				if (gameGrid[j + position.x + (k + position.y) * gameGrid.width].hasTetris && subField[j][k].hasTetris)
+				if (mainGame.grid[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris)
 					return true;
 				else
 					return false;
@@ -167,7 +165,7 @@ function moveRight()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (subField.collision(position.x, position.y) == true || ((position.x + i) + (position.y + j) * gameGrid.width) >= (gameGrid.width / gameGrid.squareWidth))
+			if (subField.collision(position.x, position.y) == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
 				validMove = false;
 		}
 	}
@@ -188,7 +186,7 @@ function moveLeft()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (subField.collision() == true || ((position.x + i) + (position.y + j) * gameGrid.width) > 0)
+			if (subField.collision() == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) > 0)
 				validMove = false;
 		}
 	}
@@ -213,15 +211,13 @@ function naturalFall()
 				validMove = false;
 		}
 	}
-
-<<<<<<< HEAD
     if (validMove == true)
     {
         subField.writeState(x, y + 1);
     }
     else
         subField.revertState();
-=======
+
 	if (validMove == true)
 	{
 		position.y = position.y + 1;
@@ -229,7 +225,6 @@ function naturalFall()
 	}
 	else
 		subField.revertState();
->>>>>>> fixed tetris errors kind of
 }
 
 function writeState()
@@ -238,8 +233,8 @@ function writeState()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			gameGrid[i + position.x  + (j + position.y) * gameGrid.width] = subField[i][j];
-			[position.x + (j + position.y) * gameGrid.width].hasTetris = false;
+			mainGame.grid[i + position.x  + (j + position.y) * mainGame.grid.width] = subField[i][j];
+			[position.x + (j + position.y) * mainGame.grid.width].hasTetris = false;
 			subField.saveState();
 		}
 	}
@@ -259,7 +254,6 @@ function rotateClockwise()
 {
 	subField.clearField();
 
-<<<<<<< HEAD
     if (rotation % 360 == 0)
     {
         if (blockType == 1)
@@ -469,7 +463,7 @@ function rotateClockwise()
         }
     }
     rotation = rotation + 90;
-=======
+
 	if (rotation % 360 == 0)
 	{
 		if (blockType == 1)
@@ -679,7 +673,6 @@ function rotateClockwise()
 		}
 	}
 	rotation = rotation + 90;
->>>>>>> fixed tetris errors kind of
 }
 
 function rotateCounterClockwise()
