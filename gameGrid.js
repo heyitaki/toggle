@@ -191,7 +191,7 @@ gameGrid.prototype.withinBounds = function(x, y)
 
 gameGrid.prototype.checkSquare = function(index)
 {
-	return true;//this.squares[index].hasTetris;
+	return this.squares[index].hasTetris;
 }
 
 gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)

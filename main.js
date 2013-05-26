@@ -2,7 +2,6 @@ jQuery(function($)
 {
 	var canvasOffset = $('#gameCanvas').offset();
 	mainGame = new game();
-	
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
 
@@ -11,7 +10,6 @@ jQuery(function($)
 	$(window).mousedown(function(e)
 	{
 		mainGame.input.mouseDown(e.button);
-		moveRight();
 	});
 	
 	$(window).mousemove(function(e)
