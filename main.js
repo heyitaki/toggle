@@ -6,7 +6,8 @@ jQuery(function($)
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
 
-	intializeBlockArray();	
+	intializeBlockArray();
+	createNextBlock();	
 	$(window).mousedown(function(e)
 	{
 		mainGame.input.mouseDown(e.button);
@@ -25,7 +26,20 @@ jQuery(function($)
 		mainGame.updateScore();
 		mainGame.clearWord();
 	});
+
+	$(window).keydown(function(e)
+	{
+		if (e.which == 65)
+		{
+			moveLeft();
+		}
+		if (e.which == 68)
+		{
+			moveRight();
+		}
+	});
+
 	mainGame.setUpCanvas();	
-	
+	setInterval(naturalFall, 4000);	
 	setInterval(tick, 2);
 });

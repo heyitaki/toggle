@@ -147,7 +147,7 @@ function collision()
 		{
 			if (subField[j][k].hasTetris == true)
 			{
-				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris)
+				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris || position.x < 0 || position.x > mainGame.grid.width - 4)
 					return true;
 			}
 		}
@@ -184,7 +184,7 @@ function moveLeft()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision() == true || ((position.x + i) + (position.y + j) * mainGame.grid.width) > 0)
+			if (collision())
 				validMove = false;
 		}
 	}
