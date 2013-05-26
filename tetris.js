@@ -301,16 +301,16 @@ function rotateClockwise()
         else if (blockType == 6)
         {
             subField[1][1].hasTetris = true;
-            subField[1][2].hasTetris = true;
-            subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
+            subField[2][2].hasTetris = true;
+            subField[3][2].hasTetris = true;
         }
         else if (blockType == 7)
         {
-            subField[1][0].hasTetris = true;
-            subField[1][1].hasTetris = true;
+            subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
+            subField[3][1].hasTetris = true;
         }
     }
     else if (rotation % 360 == 90)
@@ -359,7 +359,7 @@ function rotateClockwise()
         }
         else if (blockType == 7)
         {
-            subField[1][0].hasTetris = true;
+            subField[3][2].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
@@ -383,9 +383,9 @@ function rotateClockwise()
         }
         else if (blockType == 3)
         {
-            subField[1][0].hasTetris = true;
-            subField[2][1].hasTetris = true;
+            subField[1][1].hasTetris = true;
             subField[2][0].hasTetris = true;
+            subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
         else if (blockType == 4)
@@ -407,7 +407,7 @@ function rotateClockwise()
             subField[1][0].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
-            subField[3][2].hasTetris = true;
+            subField[3][1].hasTetris = true;
         }
         else if (blockType == 7)
         {

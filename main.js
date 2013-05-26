@@ -39,6 +39,10 @@ jQuery(function($)
 		{
 			naturalFall();
 		}
+		if (e.which == 87)
+		{
+			rotateClockwise();
+		}
 	});
 
 	mainGame.setUpCanvas();	
