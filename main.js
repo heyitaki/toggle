@@ -23,7 +23,6 @@ jQuery(function($)
 		mainGame.input.mouseUp(e.button);
 		mainGame.grid.clearSelected();
 		mainGame.updateScore();
-		mainGame.clearWord();
 	});
 
 	$(window).keydown(function(e)
@@ -39,11 +38,6 @@ jQuery(function($)
 		if (e.which == 83)
 		{
 			naturalFall();
-		}
-		if (e.which == 81)
-		{
-			clearField();
-			rotateClockwise();
 		}
 	});
 

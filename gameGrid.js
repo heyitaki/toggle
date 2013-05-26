@@ -5,6 +5,8 @@ function gameGrid(theGame)
 	this.height = 10;
 	this.borderSize = 5;
 	this.squares = new Array(this.width * this.height);
+	this.lastHighestBlock = 0;
+	this.nowHighestBlock = 0;
 
 	for	(var i = 0; i < this.width; i++)
 	{
@@ -108,11 +110,7 @@ gameGrid.prototype.drawTetris = function(ctx)
 			ctx.fillStyle = '#0000FF';
 			if (subField[i][j].hasTetris)
 			ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
-			else
-			{
-				ctx.fillStyle = '#FF00FF';
-					ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
-			}
+
 		}
 	}
 }

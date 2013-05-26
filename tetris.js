@@ -25,9 +25,24 @@ function intializeBlockArray()
 	}
 }
 
+function highestBlock()
+{
+	for (var i = 0; i < mainGame.grid.width; i++)
+	{
+		for (var j = 0; j < mainGame.grid.height; j++)
+		{
+			if (mainGame.grid.squares[i + j * mainGame.grid.width].hasTetris)
+			{
+				return i + j * mainGame.grid.width;
+			}
+		}
+	}
+	return -1;
+}
+
 function createNextBlock()
 {
-    //new tetromino
+	//new tetromino
     var i = Math.floor((Math.random() * 7) + 1);
     blockType = i;
     rotation = 0;
