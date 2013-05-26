@@ -12,13 +12,11 @@ function gameInput()
 gameInput.prototype.mouseDown = function(button)
 {
 	this.mouseStates[button] = true;
-	console.log('down');
 }
 
 gameInput.prototype.mouseUp = function(button)
 {
 	this.mouseStates[button] = false;
-	console.log('up');
 }
 
 gameInput.prototype.update = function()

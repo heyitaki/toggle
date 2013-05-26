@@ -12,6 +12,9 @@ function game()
 	this.ctx = $('#gameCanvas')[0].getContext('2d');
 	this.previousSquare = 0;
 	this.word = [];
+
+	this.currentSquare = 0;
+	this.previousSquare = 0;
 }
 
 game.prototype.update = function()
@@ -30,7 +33,8 @@ game.prototype.handleMouseInput = function(x, y)
 {
 	if (this.input.frameMouseStates[0])
 	{
-		this.grid.selectSquare(x, y);	
+		this.grid.compilationUpdate(this.grid.getSquareIndex(x, y));
+		console.log(this.word);	
 	}
 };
 
@@ -44,20 +48,23 @@ game.prototype.setUpCanvas = function()
 
 game.prototype.addLetter = function(prevSquareIndex, currSquareIndex)
 {
-	if(this.grid.checkSquare(this.grid.squares.gameGrid[currSquareIndex]) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex))
+  	if (currSquareIndex == undefined)
 	{
-		this.word.push(this.grid[currSquareIndex]);
+		this.word.push(this.grid.squares[prevSquareIndex]);
+		this.grid.squares[prevSquareIndex].isSelected = true;
+		return;
+	}
+	if(this.grid.checkSquare(currSquareIndex) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex))
+	{
+		this.word.push(this.grid.squares[currSquareIndex]);
+		this.grid.squares[currSquareIndex].isSelected = true;
 	}
 }
 
-game.prototype.addLetter = function(currSquareIndex)
-{
-  	this.word.push(this.grid.currSquareIndex);
-}
-
-this.clearWord = function()
+game.prototype.clearWord = function()
 {
  	this.word = [];
+	this.grid.clearSelected();
 }
 function tick()
 {

@@ -1,6 +1,7 @@
-function gameSquare()
+function gameSquare(i)
 {
-	this.hasTetris = false;
+  	this.index = i;
+	this.hasTetris = true;
 	this.isSelected = false;
 	this.letter = 'A';
 	this.selectedColor = '#00ff00';

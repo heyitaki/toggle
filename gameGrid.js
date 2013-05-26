@@ -10,7 +10,7 @@ function gameGrid(theGame)
 	{
 		for (var j = 0; j < this.height; j++)
 		{
-			this.squares[i + j * this.height] = new gameSquare();
+			this.squares[i + j * this.height] = new gameSquare(i + j * this.height);
 		}
 	}
 }
@@ -45,9 +45,9 @@ gameGrid.prototype.draw = function(ctx)
 	}
 };
 
-gameGrid.prototype.getSquare = function(x, y)
+gameGrid.prototype.getSquareIndex = function(x, y)
 {
-	if (this.withinBounds(x, y))
+ 	if (this.withinBounds(x, y))
 	{
 		x -= this.mainGame.canvasOffsetX;
 		y -= this.mainGame.canvasOffsetY;
@@ -58,9 +58,15 @@ gameGrid.prototype.getSquare = function(x, y)
 		x -= x % this.mainGame.squareWidth;
 		y -= y % this.mainGame.squareHeight;
 		
-		return this.squares[x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height];
+		return x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height;
 	}
-	return new gameSquare();
+	return -1;
+}
+
+gameGrid.prototype.getSquare = function(x, y)
+{
+	var index = this.getSquareIndex(x, y);
+	return index == -1 ? new gameSquare(-1) : this.squares[index];
 }
 
 gameGrid.prototype.selectSquare = function(x, y)
@@ -86,14 +92,20 @@ gameGrid.prototype.withinBounds = function(x, y)
 		   	y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY; 
 }
 
-gameGrid.prototype.checkSquare = function(i, j)
+gameGrid.prototype.checkSquare = function(index)
 {
-	return this.squares[i + j * this.height].hasTetris;
+	return this.squares[index].hasTetris;
 }
 
 gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 {
 	var larger;
+	if (prevSquareIndex == -1)
+	  return true;
+	if(currSquareIndex % this.width == 0 && prevSquareIndex % this.width == 1 || currSquareIndex % this.width == 1 && prevSquareIndex % this.width == 0)
+	{
+		return false;
+	}
 	if(Math.abs(currSquareIndex - prevSquareIndex) == 1)
 	{
 		return true;
@@ -121,25 +133,28 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	return false;
 }
 
-gameGrid.prototype.compilationUpdate(currSqiareIndex)
+gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
-	if(!checkSquare(gameGrid, currSquareIndex))
+	if(!this.checkSquare(currSquareIndex))
 	{
+	  	this.mainGame.clearWord();
 		return;
 	}
-	if(isAdjacent(gameGrid, word[word.length], currSquareIndex))	
+	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) > -1)
 	{
-		if(word.length = 0)
-		{
-			word.addLetter(gameGrid, currSquareIndex);
-		}
-		else
-		{
-			word.addLetter(gameGrid, word[word.length], currSquareIndex);
-		}
+	  	return;
+	}
+	if (this.mainGame.word.length == 0)
+	{
+		this.mainGame.addLetter(currSquareIndex);
+		return;
+	}
+	if(this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))	
+	{
+		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
 	}
 	else
 	{
-		clearWord();
+		this.mainGame.clearWord();
 	}	
 }
