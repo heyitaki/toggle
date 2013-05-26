@@ -137,6 +137,7 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
 	if(!this.checkSquare(currSquareIndex))
 	{
+		this.updateScore();
 	  	this.mainGame.clearWord();
 		return;
 	}
@@ -155,6 +156,7 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 	}
 	else
 	{
+		this.updateScore();
 		this.mainGame.clearWord();
 	}	
 }

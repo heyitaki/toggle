@@ -15,6 +15,8 @@ function game()
 
 	this.currentSquare = 0;
 	this.previousSquare = 0;
+
+	this.alphabetPoints = new Array(8,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
 }
 
 game.prototype.update = function()
@@ -34,7 +36,6 @@ game.prototype.handleMouseInput = function(x, y)
 	if (this.input.frameMouseStates[0])
 	{
 		this.grid.compilationUpdate(this.grid.getSquareIndex(x, y));
-		console.log(this.word);	
 	}
 };
 
@@ -65,6 +66,22 @@ game.prototype.clearWord = function()
 {
  	this.word = [];
 	this.grid.clearSelected();
+	console.log(this.score);
+}
+
+game.prototype.isLegalWord = function(word)
+{
+	return dict.indexOf(word) != -1;
+}
+
+game.prototype.updateScore = function()
+{
+	for (var i = 0; i < this.word.length; i++)
+	{
+		var letter =this.word[i].letter;
+		var asciiCode = letter.charCodeAt(0);
+		this.score += this.alphabetPoints[asciiCode - 65];
+	}
 }
 function tick()
 {
