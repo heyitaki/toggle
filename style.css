@@ -15,4 +15,6 @@ body, html {
 
 #score {
 	float: right;
+	font-size: 39px;
+	color: #454545;
 }

@@ -199,7 +199,7 @@ function rightestIndex()
 
 function bottomIndex()
 {
-	var bottomest = 0;
+	var bottomest = 1;
 	for (var i = 0; i < 4; i++)
 	{
 		for (var j = 0; j < 4; j++)
@@ -376,10 +376,10 @@ function rotateClockwise()
         }
         else if (blockType == 2)
         {
-            subField[2][0].hasTetris = true;
-            subField[2][1].hasTetris = true;
-            subField[2][2].hasTetris = true;
-            subField[2][3].hasTetris = true;
+            subField[3][0].hasTetris = true;
+            subField[3][1].hasTetris = true;
+            subField[3][2].hasTetris = true;
+            subField[3][3].hasTetris = true;
         }
         else if (blockType == 3)
         {
