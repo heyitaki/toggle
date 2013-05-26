@@ -211,7 +211,7 @@ function naturalFall()
 	}
     if (validMove == true)
     {
-        writeState(x, y + 1);
+        writeState(position.x, position.y + 1);
     }
     else
         revertState();
