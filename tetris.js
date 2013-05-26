@@ -139,7 +139,7 @@ function createNextBlock()
 	}
 }
 
-function collision()
+function collision(direction)
 {
 	for (var j = 0; j < 4; j++)
 	{
@@ -147,7 +147,7 @@ function collision()
 		{
 			if (subField[j][k].hasTetris == true)
 			{
-				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris || position.x < 0 || position.x > mainGame.grid.width - 4)
+				if (mainGame.grid.squares[j + position.x + (k + position.y) * mainGame.grid.width].hasTetris && subField[j][k].hasTetris || position.x + direction < leftestIndex() - 1 || position.x + direction > mainGame.grid.width - rightestIndex() - 1)
 					return true;
 			}
 		}
@@ -163,7 +163,7 @@ function moveRight()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision(position.x, position.y) || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
+			if (collision(1) || ((position.x + i) + (position.y + j) * mainGame.grid.width) >= (mainGame.grid.width / mainGame.grid.squareWidth))
 				validMove = false;
 		}
 	}
@@ -177,6 +177,53 @@ function moveRight()
 		revertState();
 }
 
+function place()
+{
+
+}
+
+function leftestIndex()
+{
+	var leftest = 4;
+	for (var i = 0; i < 4; i++)
+	{
+		for (var j = 0; j < 4; j++)
+		{
+			if (subField[i][j].hasTetris && i < leftest)
+				leftest = i;
+		}
+	}
+	return leftest;
+}
+
+function rightestIndex()
+{
+	var rightest = 0;
+	for (var i = 0; i < 4; i++)
+	{
+		for (var j = 0; j < 4; j++)
+		{
+			if (subField[i][j].hasTetris && i > rightest)
+				rightest = i;
+		}
+	}
+	return rightest;
+}
+
+function bottomIndex()
+{
+	var bottomest = 0;
+	for (var i = 0; i < 4; i++)
+	{
+		for (var j = 0; j < 4; j++)
+		{
+			if (subField[i][j].hasTetris && j > bottomest)
+				bottomest = j;
+		}
+	}
+	return bottomest;
+}
+
 function moveLeft()
 {
 	var validMove = true;
@@ -184,7 +231,7 @@ function moveLeft()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-			if (collision())
+			if (collision(-1))
 				validMove = false;
 		}
 	}
