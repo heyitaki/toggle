@@ -82,15 +82,15 @@ function createNextBlock()
     }	
 }
 
-function collision()
+function collision(direction)
 {
 	for (var j = 0; j < 4; j++)
 	{
 		for(var k = 0; k < 4; k++)
 		{
-			if (subField[j][k].hasTetris == true)
+			if (subField[k][j].hasTetris == true)
 			{
-				var index = j + position.x + (k + position.y) * mainGame.grid.width;
+				var index = j + position.x + (k + position.y + 1) * mainGame.grid.width + direction;
 				if (index < mainGame.grid.width * mainGame.grid.height)
 				if (mainGame.grid.squares[index].hasTetris)
 					return true;
@@ -124,7 +124,7 @@ function moveRight()
 		{
 			if (collidesWithWalls(1))
 				validMove = false;
-			if (collision())
+			if (collision(1))
 			{
 				place();
 				validMove = false;
@@ -146,7 +146,7 @@ function place()
 			{
 				var index = (position.x + i) + (position.y + j) * this.mainGame.grid.width;
 				if (index < mainGame.grid.width * mainGame.grid.height)
-				this.mainGame.grid.squares[index].hasTetris = subField[i][j].hasTetris || this.mainGame.grid.squares[index].hasTetris;
+				this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
 			}
 		}
 		clearField();
@@ -206,7 +206,7 @@ function moveLeft()
 		{
 			if (collidesWithWalls(-1))
 				validMove = false;
-			else if (collision())
+			else if (collision(-1))
 			{
 				place();
 				validMove = false;
@@ -227,9 +227,10 @@ function naturalFall()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-		 	if (collision())
+		 	if (collision(0))
 			{
 				validMove = false;
+				place();
 			}	
 		}
 	}

@@ -37,6 +37,10 @@ jQuery(function($)
 		{
 			moveRight();
 		}
+		if (e.which == 83)
+		{
+			naturalFall();
+		}
 	});
 
 	mainGame.setUpCanvas();	
