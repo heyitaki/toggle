@@ -1,30 +1,27 @@
 jQuery(function($)
 {
-		document.mainGame = new game();
+	var canvasOffset = $('#gameCanvas').offset();
+	mainGame = new game();
+	
+	mainGame.canvasOffsetX = canvasOffset.left - 100;
+	mainGame.canvasOffsetY = canvasOffset.top;
 
-		$(window).resize(function(e)
-		{
-	    	document.mainGame.windowResize($(window).width(), $(window).height());
-		});
-		
-		$(window).mousedown(function(e)
-		{
-			//document.mainGame.handleMouseInput(e.clientX, e.clientY);
-			document.mainGame.input.mouseDown(e.button);	
-		});
-		
-		$(window).mousemove(function(e)
-		{
-			document.mainGame.handleMouseInput(e.clientX, e.clientY);	
-		});
+	$(window).mousedown(function(e)
+	{
+		mainGame.input.mouseDown(e.button);	
+	});
+	
+	$(window).mousemove(function(e)
+	{
+		mainGame.handleMouseInput(e.clientX, e.clientY);	
+	});
 
-		$(window).mouseup(function(e)
-		{
-			document.mainGame.input.mouseUp(e.button);
-			document.mainGame.grid.clearSelected();
-		});
-
-		document.mainGame.windowResize($(window).width(), $(window).height());
-		
-		setInterval(tick, 2);
+	$(window).mouseup(function(e)
+	{
+		mainGame.input.mouseUp(e.button);
+		mainGame.grid.clearSelected();
+	});
+	mainGame.setUpCanvas();	
+	
+	setInterval(tick, 2);
 });

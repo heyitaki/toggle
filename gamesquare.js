@@ -5,5 +5,5 @@ function gameSquare()
 	this.letter = 'A';
 	this.selectedColor = '#00ff00';
 	this.borderColor = '#1DAEEF';
-	this.color = '#ADBEFF';
+	this.color = '#9E9E9E';
 }

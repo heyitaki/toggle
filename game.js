@@ -1,9 +1,11 @@
 function game()
 {
+	this.canvasOffsetX = 0;
+	this.canvasOffsetY = 0;
 	this.squareWidth = 50;
 	this.squareHeight = 50;
-	this.windowWidth = 0;
-	this.windowHeight = 0;
+	this.canvasWidth = 0;
+	this.canvasHeight = 0;
 	this.score = 0;
 	this.grid = new gameGrid(this);
 	this.input = new gameInput();
@@ -18,6 +20,8 @@ game.prototype.update = function()
 
 game.prototype.draw = function()
 {
+	this.ctx.fillStyle = '#ADADAD';
+	this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 	this.grid.draw(this.ctx);
 };
 
@@ -29,16 +33,16 @@ game.prototype.handleMouseInput = function(x, y)
 	}
 };
 
-game.prototype.windowResize = function(x, y)
+game.prototype.setUpCanvas = function()
 {
-	this.windowWidth = x;
-	this.windowHeight = y;
-	this.ctx.canvas.width = x;
-	this.ctx.canvas.height = y;
+	this.ctx.canvas.width = this.squareWidth * this.grid.width + this.grid.borderSize;
+	this.ctx.canvas.height = this.squareHeight * this.grid.height + this.grid.borderSize;
+	this.canvasWidth = this.ctx.canvas.width;
+	this.canvasHeight = this.ctx.canvas.height;
 };
 
 function tick()
 {
-	document.mainGame.update();
-	document.mainGame.draw();
+	mainGame.update();
+	mainGame.draw();
 }

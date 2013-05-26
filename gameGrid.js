@@ -26,10 +26,8 @@ gameGrid.prototype.draw = function(ctx)
 			var square = this.squares[i + j * this.height];
 
 			ctx.font="40px sans-serif";
+			ctx.textAllign = "center";
 			
-			ctx.fillStyle = square.borderColor;
-			ctx.fillRect(coordX, coordY, this.mainGame.squareWidth, this.mainGame.squareHeight);
-		
 			if (!square.isSelected)
 			{	
 				ctx.fillStyle = square.color;
@@ -39,10 +37,10 @@ gameGrid.prototype.draw = function(ctx)
 				ctx.fillStyle = square.selectedColor;
 			}
 
-			ctx.fillRect(coordX + this.borderSize / 2, coordY + this.borderSize / 2, this.mainGame.squareWidth - 1 - this.borderSize, this.mainGame.squareHeight - 1 - this.borderSize);
+			ctx.fillRect(coordX + this.borderSize, coordY + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
 
-			ctx.fillStyle = "#FF0000";
-			ctx.fillText(square.letter, coordX + 10, coordY + this.mainGame.squareHeight / 2 + 10);
+			ctx.fillStyle = "#4A4849";
+			ctx.fillText(square.letter, coordX + 13, coordY + this.mainGame.squareHeight / 2 + 17);
 		}
 	}
 };
@@ -51,10 +49,15 @@ gameGrid.prototype.getSquare = function(x, y)
 {
 	if (this.withinBounds(x, y))
 	{
+		x -= this.mainGame.canvasOffsetX;
+		y -= this.mainGame.canvasOffsetY;
+
 		x = Math.floor(x);
 		y = Math.floor(y);
+		
 		x -= x % this.mainGame.squareWidth;
 		y -= y % this.mainGame.squareHeight;
+		
 		return this.squares[x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height];
 	}
 	return new gameSquare();
@@ -77,5 +80,8 @@ gameGrid.prototype.clearSelected = function()
 
 gameGrid.prototype.withinBounds = function(x, y)
 {
-	return x > 0 && y > 0 && x < this.width * this.mainGame.squareWidth && y < this.height * this.mainGame.squareHeight; 
+	return x > this.mainGame.canvasOffsetX &&
+		   	y > this.mainGame.canvasOffsetY &&
+		   	x < this.width * this.mainGame.squareWidth + this.mainGame.canvasOffsetX &&
+		   	y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY; 
 }
