@@ -20,6 +20,7 @@ jQuery(function($)
 	{
 		mainGame.input.mouseUp(e.button);
 		mainGame.grid.clearSelected();
+		mainGame.clearWord();
 	});
 	mainGame.setUpCanvas();	
 	

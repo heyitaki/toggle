@@ -68,6 +68,10 @@ game.prototype.clearWord = function()
 }
 function tick()
 {
+  	if (!mainGame.input.frameMouseStates[0])
+	{
+	  	mainGame.clearWord();
+	}
 	mainGame.update();
 	mainGame.draw();
 }
