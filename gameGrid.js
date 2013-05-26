@@ -100,7 +100,7 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	var larger;
 	if (prevSquareIndex == -1)
 	  return true;
-	if(currSquareIndex % this.width == 0 && prevSquareIndex % this.width == 1 || currSquareIndex % this.width == 1 && prevSquareIndex % this.width == 0)
+	if(currSquareIndex % this.width == 0 && prevSquareIndex % this.width == 9 || currSquareIndex % this.width == 9 && prevSquareIndex % this.width == 0)
 	{
 		return false;
 	}
