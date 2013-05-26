@@ -18,17 +18,22 @@ game.prototype.draw = function()
 	this.grid.draw(this.ctx);
 };
 
+game.prototype.handleMouseInput = function(x, y)
+{
+	this.grid.getSquare(x, y).hasTetris = true;
+	this.grid.getSquare(x, y).letter = 'Z';
+};
+
 game.prototype.windowResize = function(x, y)
 {
 	this.windowWidth = x;
 	this.windowHeight = y;
 	this.ctx.canvas.width = x;
 	this.ctx.canvas.height = y;
-}
+};
 
-tick = function()
+function tick()
 {
 	document.mainGame.update();
 	document.mainGame.draw();
-	console.log('tick');
 }

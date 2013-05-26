@@ -29,8 +29,16 @@ gameGrid.prototype.draw = function(ctx)
 			
 			ctx.fillStyle = square.borderColor;
 			ctx.fillRect(coordX, coordY, this.mainGame.squareWidth, this.mainGame.squareHeight);
-			
-			ctx.fillStyle = square.color;
+		
+			if (!square.hasTetris)
+			{	
+				ctx.fillStyle = square.color;
+			}
+			else 
+			{
+				ctx.fillStyle = square.selectedColor;
+			}
+
 			ctx.fillRect(coordX + this.borderSize / 2, coordY + this.borderSize / 2, this.mainGame.squareWidth - 1 - this.borderSize, this.mainGame.squareHeight - 1 - this.borderSize);
 
 			ctx.fillStyle = "#FF0000";
@@ -38,3 +46,14 @@ gameGrid.prototype.draw = function(ctx)
 		}
 	}
 };
+
+gameGrid.prototype.getSquare = function(x, y)
+{
+	x = Math.floor(x);
+	y = Math.floor(y);
+
+	x -= x % this.mainGame.squareWidth;
+	y -= y % this.mainGame.squareHeight;
+
+	return this.squares[x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height];
+}
