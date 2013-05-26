@@ -77,52 +77,52 @@ function intializeBlockArray()
 function createNextBlock()
 {
     //new tetromino
-    int i = Math.floor((Math.random() * 7) + 1);
+    var i = Math.floor((Math.random() * 7) + 1);
     blockType = i;
     rotation = 0;
-    if i = 1 //O
+    if (i == 1) //O
     {
         subField[1][1].hasTetris = true;
         subField[1][2].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
     }    
-    else if (i = 2) //I
+    else if (i == 2) //I
     {
         subField[1][0].hasTetris = true;
         subField[1][1].hasTetris = true;
         subField[1][2].hasTetris = true;
         subField[1][3].hasTetris = true;
     }
-    else if (i = 3) //T
+    else if (i == 3) //T
     {
         subField[2][0].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
         subField[1][1].hasTetris = true;
     }
-    else if (i = 4) //L
+    else if (i == 4) //L
     {
         subField[2][0].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
         subField[1][2].hasTetris = true;
     }
-    else if (i = 5) //J
+    else if (i == 5) //J
     {
         subField[1][0].hasTetris = true;
         subField[2][0].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
     }
-    else if (i = 6) //S
+    else if (i == 6) //S
     {
         subField[2][0].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[1][1].hasTetris = true;
         subField[1][2].hasTetris = true;
     }
-    else if (i = 7) //Z
+    else if (i == 7) //Z
     {
         subField[1][0].hasTetris = true;
         subField[1][1].hasTetris = true;
@@ -200,7 +200,7 @@ function naturalFall(x, y)
         }
     }
 
-    if validMove = true
+    if (validMove == true)
     {
         subField.writeState(x, y + 1);
     }
@@ -235,51 +235,51 @@ function rotateClockwise()
 {
     subField.clearField();
 
-    if rotation % 360 = 0
+    if (rotation % 360 == 0)
     {
-        if blockType =  1
+        if (blockType == 1)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
         }
-        else if blockType = 2
+        else if (blockType == 2)
         {
             subField[0][2].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][2].hasTetris = true;
         }
-        else if blockType = 3
+        else if (blockType == 3)
         {
             subField[1][1].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 4
+        else if (blockType == 4)
         {
             subField[1][1].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
             subField[3][2].hasTetris = true;
         }
-        else if blockType = 5
+        else if (blockType == 5)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 6
+        else if (blockType == 6)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
         }
-        else if blockType = 7
+        else if (blockType == 7)
         {
             subField[1][0].hasTetris = true;
             subField[1][1].hasTetris = true;
@@ -287,51 +287,51 @@ function rotateClockwise()
             subField[2][2].hasTetris = true;
         }
     }
-    else if rotation % 360 = 90
+    else if (rotation % 360 == 90)
     {
-        if blockType =  1
+        if (blockType ==  1)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
         }
-        else if blockType = 2
+        else if (blockType == 2)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[2][3].hasTetris = true;
         }
-        else if blockType = 3
+        else if (blockType == 3)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 4
+        else if (blockType == 4)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][0].hasTetris = true;
         }
-        else if blockType = 5
+        else if (blockType == 5)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][2].hasTetris = true;
         }
-        else if blockType = 6
+        else if (blockType == 6)
         {
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[3][0].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 7
+        else if (blockType == 7)
         {
             subField[1][0].hasTetris = true;
             subField[2][0].hasTetris = true;
@@ -339,51 +339,51 @@ function rotateClockwise()
             subField[3][1].hasTetris = true;
         }
     }
-    else if rotation % 360 = 180
+    else if (rotation % 360 == 180)
     {
-        if blockType =  1
+        if (blockType ==  1)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
         }
-        else if blockType = 2
+        else if (blockType == 2)
         {
             subField[0][1].hasTetris = true;
             subField[1][1].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 3
+        else if (blockType == 3)
         {
             subField[1][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 4
+        else if (blockType == 4)
         {
             subField[1][0].hasTetris = true;
             subField[1][1].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 5
+        else if (blockType == 5)
         {
             subField[1][1].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][0].hasTetris = true;
             subField[3][1].hasTetris = true;
         }
-        else if blockType = 6
+        else if (blockType == 6)
         {
             subField[1][0].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[3][2].hasTetris = true;
         }
-        else if blockType = 7
+        else if (blockType == 7)
         {
             subField[1][1].hasTetris = true;
             subField[2][0].hasTetris = true;
@@ -391,51 +391,51 @@ function rotateClockwise()
             subField[3][0].hasTetris = true;
         }
     }
-    else if rotation % 360 = 270
+    else if (rotation % 360 == 270)
     {
-        if blockType =  1
+        if (blockType == 1)
         {
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
         }
-        else if blockType = 2
+        else if (blockType == 2)
         {
             subField[1][0].hasTetris = true;
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
             subField[1][3].hasTetris = true;
         }
-        else if blockType = 3
+        else if (blockType == 3)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[1][1].hasTetris = true;
         }
-        else if blockType = 4
+        else if (blockType == 4)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
             subField[1][2].hasTetris = true;
         }
-        else if blockType = 5
+        else if (blockType == 5)
         {
             subField[1][0].hasTetris = true;
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[2][2].hasTetris = true;
         }
-        else if blockType = 6
+        else if (blockType == 6)
         {
             subField[2][0].hasTetris = true;
             subField[2][1].hasTetris = true;
             subField[1][1].hasTetris = true;
             subField[1][2].hasTetris = true;
         }
-        else if blockType = 7
+        else if (blockType == 7)
         {
             subField[1][0].hasTetris = true;
             subField[1][1].hasTetris = true;

@@ -15,6 +15,68 @@ function gameGrid(theGame)
 	}
 }
 
+gameGrid.prototype.generateGrid = function()
+{
+	for (var i = 0; i < this.squares.length; i++)
+	{
+		this.squares[i].letter = this.randChar();
+	}
+
+	do
+	{
+		var numberOfVowels = this.numberOfOccurances('A') + this.numberOfOccurances('E') + this.numberOfOccurances('I') + this.numberOfOccurances('O') + this.numberOfOccurances('U');
+		var fractionOfVowels = numberOfVowels / (this.width * this.height);
+		this.getRandomSquare().letter = this.randVowel();
+	} while(fractionOfVowels < 0.5)
+	
+};
+
+gameGrid.prototype.getRandomSquare()
+{
+	var rand;
+	do
+	{
+		rand = Math.random();
+		rand = Math.floor(rand * this.squares.length);
+	}while(this.isVowel(this.squares[rand].letter))
+	return this.squares[rand];
+}
+
+gameGrid.prototype.isVowel(var letter)
+{
+	if(letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U')
+	{
+		return true;
+	}
+	return false;
+}
+
+gameGrid.prototype.randVowel()
+{
+	var rand = Math.random();
+	rand = Math.floor(rand * 5);
+	if(rand == 0)
+	{
+		return 'A';
+	}
+	else if(rand == 1)
+	{
+		return 'E';
+	}
+	else if(rand == 2)
+	{
+		return 'I';
+	}
+	else if(rand == 3)
+	{
+		return 'O';
+	}
+	else if(rand == 4)
+	{
+		return 'U';
+	}
+};
+
 gameGrid.prototype.draw = function(ctx)
 {
 	for (var i = 0; i < this.width; i++)
@@ -43,6 +105,22 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.fillText(square.letter, coordX + 13, coordY + this.mainGame.squareHeight / 2 + 17);
 		}
 	}
+};
+gameGrid.prototype.numberOfOccurances = function(let)
+{
+	var counter = 0;
+	for(var i = 0; i < this.squares.length; i++)
+	{
+		if(this.squares[i].letter = let)
+		{
+			counter++;
+		}
+	}
+};
+
+gameGrid.prototype.randChar = function()
+{
+	String.fromCharCode(Math.floor((Math.random() * 26) + 1) + 64);
 };
 
 gameGrid.prototype.getSquareIndex = function(x, y)
