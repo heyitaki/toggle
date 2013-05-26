@@ -66,7 +66,6 @@ game.prototype.clearWord = function()
 {
  	this.word = [];
 	this.grid.clearSelected();
-	console.log(this.score);
 }
 
 game.prototype.updateScore = function()
