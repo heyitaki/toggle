@@ -162,7 +162,7 @@ function leftestIndex()
 	{
 		for (var j = 0; j < 4; j++)
 		{
-			if (subField[i][j].hasTetris && i < leftest)
+			if (subField[j][i].hasTetris && i < leftest)
 				leftest = i;
 		}
 	}

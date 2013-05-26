@@ -108,6 +108,11 @@ gameGrid.prototype.drawTetris = function(ctx)
 			ctx.fillStyle = '#0000FF';
 			if (subField[i][j].hasTetris)
 			ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
+			else
+			{
+				ctx.fillStyle = '#FF00FF';
+					ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
+			}
 		}
 	}
 }
