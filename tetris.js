@@ -82,61 +82,7 @@ function createNextBlock()
         subField[1][1].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
-    }
-
-	//new tetromino
-	var i = Math.floor((Math.random() * 7) + 1);
-	blockType = i;
-	rotation = 0;
-	if (i == 1) //O
-	{
-		subField[1][1].hasTetris = true;
-		subField[1][2].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[2][2].hasTetris = true;
-	}    
-	else if (i == 2) //I
-	{
-		subField[1][0].hasTetris = true;
-		subField[1][1].hasTetris = true;
-		subField[1][2].hasTetris = true;
-		subField[1][3].hasTetris = true;
-	}
-	else if (i == 3) //T
-	{
-		subField[2][0].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[2][2].hasTetris = true;
-		subField[1][1].hasTetris = true;
-	}
-	else if (i == 4) //L
-	{
-		subField[2][0].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[2][2].hasTetris = true;
-		subField[1][2].hasTetris = true;
-	}
-	else if (i == 5) //J
-	{
-		subField[1][0].hasTetris = true;
-		subField[2][0].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[2][2].hasTetris = true;
-	}
-	else if (i == 6) //S
-	{
-		subField[2][0].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[1][1].hasTetris = true;
-		subField[1][2].hasTetris = true;
-	}
-	else if (i == 7) //Z
-	{
-		subField[1][0].hasTetris = true;
-		subField[1][1].hasTetris = true;
-		subField[2][1].hasTetris = true;
-		subField[2][2].hasTetris = true;
-	}
+    }	
 }
 
 function collision(direction)
@@ -247,7 +193,7 @@ function bottomIndex()
 				bottomest = j;
 		}
 	}
-	return bottomest + position.y - 1;
+	return bottomest + position.y - 2;
 }
 
 function moveLeft()
