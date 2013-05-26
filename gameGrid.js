@@ -30,7 +30,7 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.fillStyle = square.borderColor;
 			ctx.fillRect(coordX, coordY, this.mainGame.squareWidth, this.mainGame.squareHeight);
 		
-			if (!square.hasTetris)
+			if (!square.isSelected)
 			{	
 				ctx.fillStyle = square.color;
 			}
@@ -49,11 +49,33 @@ gameGrid.prototype.draw = function(ctx)
 
 gameGrid.prototype.getSquare = function(x, y)
 {
-	x = Math.floor(x);
-	y = Math.floor(y);
+	if (this.withinBounds(x, y))
+	{
+		x = Math.floor(x);
+		y = Math.floor(y);
+		x -= x % this.mainGame.squareWidth;
+		y -= y % this.mainGame.squareHeight;
+		return this.squares[x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height];
+	}
+	return new gameSquare();
+}
 
-	x -= x % this.mainGame.squareWidth;
-	y -= y % this.mainGame.squareHeight;
+gameGrid.prototype.selectSquare = function(x, y)
+{
+	this.getSquare(x, y).isSelected = true;
+	this.getSquare(x, y).letter = 'Z';
+}
 
-	return this.squares[x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height];
+gameGrid.prototype.clearSelected = function()
+{
+	for (var i = 0; i < this.squares.length; i++)
+	{
+		this.squares[i].isSelected = false;
+		this.squares[i].letter = 'A';
+	}
+}
+
+gameGrid.prototype.withinBounds = function(x, y)
+{
+	return x > 0 && y > 0 && x < this.width * this.mainGame.squareWidth && y < this.height * this.mainGame.squareHeight; 
 }

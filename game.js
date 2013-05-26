@@ -6,11 +6,14 @@ function game()
 	this.windowHeight = 0;
 	this.score = 0;
 	this.grid = new gameGrid(this);
+	this.input = new gameInput();
 	this.ctx = $('#gameCanvas')[0].getContext('2d');
+	this.previousSquare = 0;
 }
 
 game.prototype.update = function()
 {
+	this.input.update();
 };
 
 game.prototype.draw = function()
@@ -20,8 +23,10 @@ game.prototype.draw = function()
 
 game.prototype.handleMouseInput = function(x, y)
 {
-	this.grid.getSquare(x, y).hasTetris = true;
-	this.grid.getSquare(x, y).letter = 'Z';
+	if (this.input.frameMouseStates[0])
+	{
+		this.grid.selectSquare(x, y);	
+	}
 };
 
 game.prototype.windowResize = function(x, y)
