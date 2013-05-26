@@ -25,7 +25,7 @@ gameGrid.prototype.draw = function(ctx)
 			var coordY = j * this.mainGame.squareHeight;
 			var square = this.squares[i + j * this.height];
 
-			ctx.font="40px sans-serif";
+			ctx.font="30px sans-serif";
 			ctx.textAllign = "center";
 			
 			if (!square.isSelected)

@@ -16,7 +16,7 @@ function game()
 	this.currentSquare = 0;
 	this.previousSquare = 0;
 
-	this.alphabetPoints = new Array(8,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1);
+	this.alphabetPoints = new Array(1,3,3,3,1,3,2,4,2,5,4,3,4,2,2,2,9,2,2,2,4,4,3,9,4,11);
 }
 
 game.prototype.update = function()
