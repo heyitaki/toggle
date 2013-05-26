@@ -103,17 +103,20 @@ gameGrid.prototype.draw = function(ctx)
 			ctx.font="30px sans-serif";
 			ctx.textAllign = "center";
 			
+			var special = false;
 			if (square.isSelected)
 			{	
-				ctx.fillStyle = square.color;
+				ctx.fillStyle = square.selectedColor;
+				special = true;
 			}
 			if (square.hasTetris)
 			{
 				ctx.fillStyle = '#000000';
+				special = true;
 			}
-			else 
+			if (!special) 
 			{
-				ctx.fillStyle = square.selectedColor;
+				ctx.fillStyle = square.color;
 			}
 
 			ctx.fillRect(coordX + this.borderSize, coordY + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
