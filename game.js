@@ -11,6 +11,7 @@ function game()
 	this.input = new gameInput();
 	this.ctx = $('#gameCanvas')[0].getContext('2d');
 	this.previousSquare = 0;
+	this.word = [];
 }
 
 game.prototype.update = function()
@@ -41,6 +42,23 @@ game.prototype.setUpCanvas = function()
 	this.canvasHeight = this.ctx.canvas.height;
 };
 
+game.prototype.addLetter = function(prevSquareIndex, currSquareIndex)
+{
+	if(this.grid.checkSquare(this.grid.squares.gameGrid[currSquareIndex]) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex))
+	{
+		this.word.push(this.grid[currSquareIndex]);
+	}
+}
+
+game.prototype.addLetter = function(currSquareIndex)
+{
+  	this.word.push(this.grid.currSquareIndex);
+}
+
+this.clearWord = function()
+{
+ 	this.word = [];
+}
 function tick()
 {
 	mainGame.update();

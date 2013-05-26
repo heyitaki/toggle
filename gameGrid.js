@@ -85,3 +85,61 @@ gameGrid.prototype.withinBounds = function(x, y)
 		   	x < this.width * this.mainGame.squareWidth + this.mainGame.canvasOffsetX &&
 		   	y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY; 
 }
+
+gameGrid.prototype.checkSquare = function(i, j)
+{
+	return this.squares[i + j * this.height].hasTetris;
+}
+
+gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
+{
+	var larger;
+	if(Math.abs(currSquareIndex - prevSquareIndex) == 1)
+	{
+		return true;
+	}
+
+	if(prevSquareIndex < currSquareIndex)
+	{
+		larger = currSquareIndex;
+		var shiftedIndex = larger - this.width
+	
+	 	  if(Math.abs(shiftedIndex - prevSquareIndex) <= 1)
+		{
+			return true;
+		}
+	}
+	else
+	{
+		larger = prevSquareIndex;
+		var shiftedIndex = larger - this.width
+		if(Math.abs(shiftedIndex - currSquareIndex) <= 1)
+		{
+			return true;
+		}
+	}
+	return false;
+}
+
+gameGrid.prototype.compilationUpdate(currSqiareIndex)
+{
+	if(!checkSquare(gameGrid, currSquareIndex))
+	{
+		return;
+	}
+	if(isAdjacent(gameGrid, word[word.length], currSquareIndex))	
+	{
+		if(word.length = 0)
+		{
+			word.addLetter(gameGrid, currSquareIndex);
+		}
+		else
+		{
+			word.addLetter(gameGrid, word[word.length], currSquareIndex);
+		}
+	}
+	else
+	{
+		clearWord();
+	}	
+}
