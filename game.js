@@ -77,7 +77,7 @@ game.prototype.updateScore = function()
 		{
 			var letter =this.word[i].letter;
 			var asciiCode = letter.charCodeAt(0);
-			this.score += this.alphabetPoints[asciiCode - 65];
+			this.score += this.alphabetPoints[asciiCode - 65] * 15;
 		}
 
 		$('#score').html(this.score);

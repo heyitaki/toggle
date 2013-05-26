@@ -49,6 +49,6 @@ jQuery(function($)
 	setInterval(function()
 	{
 		naturalFall();
-	}, 1000);	
+	}, 3000);	
 	setInterval(tick, 2);
 });
