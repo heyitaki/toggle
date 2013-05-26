@@ -82,6 +82,8 @@ game.prototype.updateScore = function()
 		var asciiCode = letter.charCodeAt(0);
 		this.score += this.alphabetPoints[asciiCode - 65];
 	}
+
+	$('#score').html(this.score);
 }
 function tick()
 {
