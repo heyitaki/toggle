@@ -144,7 +144,9 @@ function place()
 		{
 			for (var j = 0; j < 4; j++)
 			{
-				this.mainGame.grid.squares[(position.y + i) + (position.x + j) * this.mainGame.grid.width].hasTetris = subField.hasTetris;
+				var index = (position.y + i) + (position.x + j) * this.mainGame.grid.width;
+				if (index < mainGame.grid.width * mainGame.grid.height)
+				this.mainGame.grid.squares[index].hasTetris = subField.hasTetris;
 			}
 		}
 		clearField();
