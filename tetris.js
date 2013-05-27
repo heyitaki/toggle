@@ -53,12 +53,10 @@ function createNextBlock()
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
     }    
-    else if (i == 2) //I
+    else if (i == 2) //Y
     {
         subField[3][0].hasTetris = true;
-        subField[3][1].hasTetris = true;
-        subField[3][2].hasTetris = true;
-        subField[3][3].hasTetris = true;
+        subField[3][1].hasTetris = true;AQ
     }
     else if (i == 3) //T
     {
