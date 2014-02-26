@@ -50,7 +50,7 @@ game.prototype.setUpCanvas = function()
 
 game.prototype.addLetter = function(prevSquareIndex, currSquareIndex)
 {
-  	if (currSquareIndex == undefined)
+	if (currSquareIndex == undefined)
 	{
 		this.word.push(this.grid.squares[prevSquareIndex]);
 		this.grid.squares[prevSquareIndex].isSelected = true;
@@ -61,16 +61,16 @@ game.prototype.addLetter = function(prevSquareIndex, currSquareIndex)
 		this.word.push(this.grid.squares[currSquareIndex]);
 		this.grid.squares[currSquareIndex].isSelected = true;
 	}
-}
+};
 
 game.prototype.clearWord = function()
 {
- 	this.word = [];
+	this.word = [];
 	this.grid.clearSelected();
-}
+};
 
 game.prototype.updateScore = function()
-{	
+{
 	if (this.isWord())
 	{
 		for (var i = 0; i < this.word.length; i++)
@@ -82,7 +82,7 @@ game.prototype.updateScore = function()
 
 		$('#score').html(this.score);
 	}
-}
+};
 
 game.prototype.isWord = function()
 {
@@ -95,7 +95,7 @@ game.prototype.isWord = function()
 			wordString += this.word[i].letter.toLowerCase();
 	}
 	return dict.indexOf(wordString) > -1;
-}
+};
 
 function tick()
 {
