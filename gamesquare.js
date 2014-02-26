@@ -1,6 +1,6 @@
 function gameSquare(i)
 {
-  	this.index = i;
+	this.index = i;
 	this.hasTetris = false;
 	this.isSelected = false;
 	this.letter = 'A';

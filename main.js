@@ -6,7 +6,7 @@ jQuery(function($)
 	mainGame.canvasOffsetY = canvasOffset.top;
 
 	intializeBlockArray();
-	createNextBlock();	
+	createNextBlock();
 	$(window).mousedown(function(e)
 	{
 		mainGame.input.mouseDown(e.button);
@@ -15,7 +15,7 @@ jQuery(function($)
 	$(window).mousemove(function(e)
 	{
 		mainGame.handleMouseInput(e.clientX, e.clientY);
-		console.log(mainGame.word);	
+		console.log(mainGame.word);
 	});
 
 	$(window).mouseup(function(e)
@@ -45,10 +45,10 @@ jQuery(function($)
 		}
 	});
 
-	mainGame.setUpCanvas();	
+	mainGame.setUpCanvas();
 	setInterval(function()
 	{
 		naturalFall();
-	}, 3000);	
+	}, 3000);
 	setInterval(tick, 2);
 });

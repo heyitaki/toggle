@@ -6,27 +6,26 @@ function gameInput()
 	this.mouseStates[2] = false;
 
 	this.frameMouseStates = this.mouseStates.slice(0);
-	this.lastFrameMouseStates = this.mouseStates.slice(0);	
+	this.lastFrameMouseStates = this.mouseStates.slice(0);
 }
 
 gameInput.prototype.mouseDown = function(button)
 {
 	this.mouseStates[button] = true;
-}
+};
 
 gameInput.prototype.mouseUp = function(button)
 {
 	this.mouseStates[button] = false;
-}
+};
 
 gameInput.prototype.update = function()
 {
 	this.lastFrameMouseStates = this.frameMouseStates.slice(0);
 	this.frameMouseStates = this.mouseStates.slice(0);
-
-}
+};
 
 gameInput.prototype.wasMousePressed = function(button)
 {
 	return this.frameMouseStates[button] && (this.frameMouseStates[button] != this.lastFrameMouseStates[button]);
-}
+};

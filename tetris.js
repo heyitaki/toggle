@@ -12,7 +12,7 @@ function intializeBlockArray()
 	//4x4 array
 	subField = new Array(4);
 	for (var i = 0; i < 4; i++)
-	{  
+	{
 		subField[i] = new Array(4);
 	}
 
@@ -52,11 +52,11 @@ function createNextBlock()
         subField[1][2].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
-    }    
+    }
     else if (i == 2) //Y
     {
         subField[3][0].hasTetris = true;
-        subField[3][1].hasTetris = true;AQ
+        subField[3][1].hasTetris = true;
     }
     else if (i == 3) //T
     {
@@ -92,7 +92,7 @@ function createNextBlock()
         subField[1][1].hasTetris = true;
         subField[2][1].hasTetris = true;
         subField[2][2].hasTetris = true;
-    }	
+    }
 }
 
 function collision(direction)
@@ -101,7 +101,7 @@ function collision(direction)
 	{
 		for(var k = 0; k < 4; k++)
 		{
-			if (subField[k][j].hasTetris == true)
+			if (subField[k][j].hasTetris)
 			{
 				var index = j + position.x + (k + position.y + 1) * mainGame.grid.width + direction;
 				if (index < mainGame.grid.width * mainGame.grid.height)
@@ -120,8 +120,8 @@ function collidesWithWalls(direction)
 	{
 		for(var k = 0; k < 4; k++)
 		{
-				if (position.x + direction < leftestIndex() - 1|| position.x + direction > rightestIndex() - 1)
-					return true;
+			if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1)
+				return true;
 		}
 	}
 
@@ -144,7 +144,7 @@ function moveRight()
 	
 		}
 	}
-	if (validMove == true)
+	if (validMove)
 	{
 		position.x = position.x + 1;
 	}
@@ -225,7 +225,7 @@ function moveLeft()
 	
 		}
 	}
-	if (validMove == true)
+	if (validMove)
 	{
 		position.x = position.x - 1;
 	}
@@ -238,14 +238,14 @@ function naturalFall()
 	{
 		for(var j = 0; j < 4; j++)
 		{
-		 	if (collision(0))
+			if (collision(0))
 			{
 				validMove = false;
 				place();
-			}	
+			}
 		}
 	}
-	if (validMove == true)
+	if (validMove)
 	{
 		if (bottomIndex() > mainGame.grid.height - 2)
 			place();
@@ -302,9 +302,8 @@ function tetris()
 			}
 		}
 		mainGame.score += 133;
-		$('#score').html(mainGame.score);	
+		$('#score').html(mainGame.score);
 	}
-
 }
 
 function rotateClockwise()

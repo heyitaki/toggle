@@ -62,9 +62,9 @@ gameGrid.prototype.getRandomSquare = function()
 	{
 		rand = Math.random();
 		rand = Math.floor(rand * this.squares.length);
-	}while(this.isVowel(this.squares[rand].letter))
+	} while(this.isVowel(this.squares[rand].letter));
 	return this.squares[rand];
-}
+};
 
 gameGrid.prototype.isVowel = function(letter)
 {
@@ -73,7 +73,7 @@ gameGrid.prototype.isVowel = function(letter)
 		return true;
 	}
 	return false;
-}
+};
 
 gameGrid.prototype.randVowel = function()
 {
@@ -113,7 +113,7 @@ gameGrid.prototype.drawTetris = function(ctx)
 
 		}
 	}
-}
+};
 
 gameGrid.prototype.draw = function(ctx)
 {
@@ -136,11 +136,11 @@ gameGrid.prototype.draw = function(ctx)
 				special = true;
 			}
 			if (square.isSelected)
-			{	
+			{
 				ctx.fillStyle = square.selectedColor;
 				special = true;
 			}
-			if (!special) 
+			if (!special)
 			{
 				ctx.fillStyle = square.color;
 			}
@@ -153,12 +153,12 @@ gameGrid.prototype.draw = function(ctx)
 	}
 	this.drawTetris(ctx);
 };
-gameGrid.prototype.numberOfOccurances = function(let)
+gameGrid.prototype.numberOfOccurances = function(letter)
 {
 	var counter = 0;
 	for(var i = 0; i < this.squares.length; i++)
 	{
-		if(this.squares[i].letter = let)
+		if(this.squares[i].letter == letter)
 		{
 			counter++;
 		}
@@ -172,7 +172,7 @@ gameGrid.prototype.randChar = function()
 
 gameGrid.prototype.getSquareIndex = function(x, y)
 {
- 	if (this.withinBounds(x, y))
+	if (this.withinBounds(x, y))
 	{
 		x -= this.mainGame.canvasOffsetX;
 		y -= this.mainGame.canvasOffsetY;
@@ -186,18 +186,18 @@ gameGrid.prototype.getSquareIndex = function(x, y)
 		return x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height;
 	}
 	return -1;
-}
+};
 
 gameGrid.prototype.getSquare = function(x, y)
 {
 	var index = this.getSquareIndex(x, y);
 	return index == -1 ? new gameSquare(-1) : this.squares[index];
-}
+};
 
 gameGrid.prototype.selectSquare = function(x, y)
 {
 	this.getSquare(x, y).isSelected = true;
-}
+};
 
 gameGrid.prototype.clearSelected = function()
 {
@@ -205,26 +205,26 @@ gameGrid.prototype.clearSelected = function()
 	{
 		this.squares[i].isSelected = false;
 	}
-}
+};
 
 gameGrid.prototype.withinBounds = function(x, y)
 {
 	return x > this.mainGame.canvasOffsetX &&
-		   	y > this.mainGame.canvasOffsetY &&
-		   	x < this.width * this.mainGame.squareWidth + this.mainGame.canvasOffsetX &&
-		   	y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY; 
-}
+		y > this.mainGame.canvasOffsetY &&
+		x < this.width * this.mainGame.squareWidth + this.mainGame.canvasOffsetX &&
+		y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY;
+};
 
 gameGrid.prototype.checkSquare = function(index)
 {
 	return this.squares[index].hasTetris;
-}
+};
 
 gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 {
 	var larger;
 	if (prevSquareIndex == -1)
-	  return true;
+		return true;
 	if(currSquareIndex % this.width == 0 && prevSquareIndex % this.width == 9 || currSquareIndex % this.width == 9 && prevSquareIndex % this.width == 0)
 	{
 		return false;
@@ -237,9 +237,9 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	if(prevSquareIndex < currSquareIndex)
 	{
 		larger = currSquareIndex;
-		var shiftedIndex = larger - this.width
+		var shiftedIndex = larger - this.width;
 	
-	 	  if(Math.abs(shiftedIndex - prevSquareIndex) <= 1)
+		if(Math.abs(shiftedIndex - prevSquareIndex) <= 1)
 		{
 			return true;
 		}
@@ -247,33 +247,33 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	else
 	{
 		larger = prevSquareIndex;
-		var shiftedIndex = larger - this.width
+		var shiftedIndex = larger - this.width;
 		if(Math.abs(shiftedIndex - currSquareIndex) <= 1)
 		{
 			return true;
 		}
 	}
 	return false;
-}
+};
 
 gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
 	if(!this.checkSquare(currSquareIndex))
 	{
 		this.mainGame.updateScore();
-	  	this.mainGame.clearWord();
+		this.mainGame.clearWord();
 		return;
 	}
 	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) > -1)
 	{
-	  	return;
+		return;
 	}
 	if (this.mainGame.word.length == 0)
 	{
 		this.mainGame.addLetter(currSquareIndex);
 		return;
 	}
-	if(this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))	
+	if(this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))
 	{
 		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
 	}
@@ -281,5 +281,5 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 	{
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();
-	}	
-}
+	}
+};
