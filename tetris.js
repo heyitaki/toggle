@@ -152,19 +152,19 @@ function moveRight()
 
 function place()
 {
-		for (var i = 0; i < 4; i++)
+	for (var i = 0; i < 4; i++)
+	{
+		for (var j = 0; j < 4; j++)
 		{
-			for (var j = 0; j < 4; j++)
-			{
-				var index = (position.x + i) + (position.y + j) * this.mainGame.grid.width;
-				if (index < mainGame.grid.width * mainGame.grid.height)
-				this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
-			}
+			var index = (position.x + i) + (position.y + j) * this.mainGame.grid.width;
+			if (index < mainGame.grid.width * mainGame.grid.height)
+			this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
 		}
-		clearField();
-		position.x = 0;
-		position.y = 0;
-		createNextBlock();
+	}
+	clearField();
+	position.x = 0;
+	position.y = 0;
+	createNextBlock();
 }
 
 function leftestIndex()
