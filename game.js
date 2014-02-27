@@ -16,7 +16,7 @@ function game()
 	this.currentSquare = 0;
 	this.previousSquare = 0;
 
-	this.alphabetPoints = new Array(1,3,3,3,1,3,2,4,2,5,4,3,4,2,2,2,9,2,2,2,4,4,3,9,4,11);
+	this.alphabetPoints = [1,3,3,3,1,3,2,4,2,5,4,3,4,2,2,2,9,2,2,2,4,4,3,9,4,11];
 }
 
 game.prototype.update = function()
@@ -50,7 +50,7 @@ game.prototype.setUpCanvas = function()
 
 game.prototype.addLetter = function(prevSquareIndex, currSquareIndex)
 {
-	if (currSquareIndex == undefined)
+	if (currSquareIndex === undefined)
 	{
 		this.word.push(this.grid.squares[prevSquareIndex]);
 		this.grid.squares[prevSquareIndex].isSelected = true;
@@ -75,7 +75,7 @@ game.prototype.updateScore = function()
 	{
 		for (var i = 0; i < this.word.length; i++)
 		{
-			var letter =this.word[i].letter;
+			var letter = this.word[i].letter;
 			var asciiCode = letter.charCodeAt(0);
 			this.score += this.alphabetPoints[asciiCode - 65] * 15;
 		}
@@ -89,19 +89,23 @@ game.prototype.isWord = function()
 	var wordString = "";
 	for (var i = 0; i < this.word.length; i++)
 	{
-		if (i == 0)
+		if (i === 0)
+		{
 			wordString += this.word[i].letter;
+		}
 		else
+		{
 			wordString += this.word[i].letter.toLowerCase();
+		}
 	}
-	return dict.indexOf(wordString) > -1;
+	return dict.indexOf(wordString) !== -1;
 };
 
 function tick()
 {
-  	if (!mainGame.input.frameMouseStates[0])
+	if (!mainGame.input.frameMouseStates[0])
 	{
-	  	mainGame.clearWord();
+		mainGame.clearWord();
 	}
 	mainGame.update();
 	mainGame.draw();

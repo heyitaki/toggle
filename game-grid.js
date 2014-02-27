@@ -66,39 +66,18 @@ gameGrid.prototype.getRandomSquare = function()
 	return this.squares[rand];
 };
 
+gameGrid.vowelArray = ['A', 'E', 'I', 'O', 'U'];
+
 gameGrid.prototype.isVowel = function(letter)
 {
-	if(letter == 'A' || letter == 'E' || letter == 'I' || letter == 'O' || letter == 'U')
-	{
-		return true;
-	}
-	return false;
+	return $.inArray(letter, gameGrid.vowelArray) !== -1;
 };
 
 gameGrid.prototype.randVowel = function()
 {
 	var rand = Math.random();
 	rand = Math.floor(rand * 5);
-	if(rand == 0)
-	{
-		return 'A';
-	}
-	else if(rand == 1)
-	{
-		return 'E';
-	}
-	else if(rand == 2)
-	{
-		return 'I';
-	}
-	else if(rand == 3)
-	{
-		return 'O';
-	}
-	else if(rand == 4)
-	{
-		return 'U';
-	}
+	return gameGrid.vowelArray[rand];
 };
 
 gameGrid.prototype.drawTetris = function(ctx)
@@ -109,8 +88,7 @@ gameGrid.prototype.drawTetris = function(ctx)
 		{
 			ctx.fillStyle = '#0000FF';
 			if (subField[i][j].hasTetris)
-			ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
-
+				ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
 		}
 	}
 };
@@ -125,7 +103,7 @@ gameGrid.prototype.draw = function(ctx)
 			var coordY = j * this.mainGame.squareHeight;
 			var square = this.squares[i + j * this.height];
 
-			ctx.font="30px sans-serif";
+			ctx.font = "30px sans-serif";
 			ctx.textAllign = "center";
 			
 			var special = false;
@@ -156,13 +134,15 @@ gameGrid.prototype.draw = function(ctx)
 gameGrid.prototype.numberOfOccurances = function(letter)
 {
 	var counter = 0;
-	for(var i = 0; i < this.squares.length; i++)
+	for (var i = 0; i < this.squares.length; i++)
 	{
-		if(this.squares[i].letter == letter)
+		if (this.squares[i].letter === letter)
 		{
 			counter++;
 		}
 	}
+
+	return counter;
 };
 
 gameGrid.prototype.randChar = function()
@@ -191,7 +171,7 @@ gameGrid.prototype.getSquareIndex = function(x, y)
 gameGrid.prototype.getSquare = function(x, y)
 {
 	var index = this.getSquareIndex(x, y);
-	return index == -1 ? new gameSquare(-1) : this.squares[index];
+	return index === -1 ? new gameSquare(-1) : this.squares[index];
 };
 
 gameGrid.prototype.selectSquare = function(x, y)
@@ -223,23 +203,27 @@ gameGrid.prototype.checkSquare = function(index)
 gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 {
 	var larger;
-	if (prevSquareIndex == -1)
-		return true;
-	if(currSquareIndex % this.width == 0 && prevSquareIndex % this.width == 9 || currSquareIndex % this.width == 9 && prevSquareIndex % this.width == 0)
-	{
-		return false;
-	}
-	if(Math.abs(currSquareIndex - prevSquareIndex) == 1)
+	if (prevSquareIndex === -1)
 	{
 		return true;
 	}
 
-	if(prevSquareIndex < currSquareIndex)
+	if (currSquareIndex % this.width === 0 && prevSquareIndex % this.width === 9 || currSquareIndex % this.width === 9 && prevSquareIndex % this.width === 0)
+	{
+		return false;
+	}
+
+	if (Math.abs(currSquareIndex - prevSquareIndex) === 1)
+	{
+		return true;
+	}
+
+	if (prevSquareIndex < currSquareIndex)
 	{
 		larger = currSquareIndex;
 		var shiftedIndex = larger - this.width;
-	
-		if(Math.abs(shiftedIndex - prevSquareIndex) <= 1)
+
+		if (Math.abs(shiftedIndex - prevSquareIndex) <= 1)
 		{
 			return true;
 		}
@@ -248,7 +232,8 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	{
 		larger = prevSquareIndex;
 		var shiftedIndex = larger - this.width;
-		if(Math.abs(shiftedIndex - currSquareIndex) <= 1)
+
+		if (Math.abs(shiftedIndex - currSquareIndex) <= 1)
 		{
 			return true;
 		}
@@ -268,7 +253,7 @@ gameGrid.prototype.compilationUpdate = function(currSquareIndex)
 	{
 		return;
 	}
-	if (this.mainGame.word.length == 0)
+	if (this.mainGame.word.length === 0)
 	{
 		this.mainGame.addLetter(currSquareIndex);
 		return;

@@ -27,19 +27,19 @@ jQuery(function($)
 
 	$(window).keydown(function(e)
 	{
-		if (e.which == 65)
+		if (e.which === 65)
 		{
 			moveLeft();
 		}
-		if (e.which == 68)
+		if (e.which === 68)
 		{
 			moveRight();
 		}
-		if (e.which == 83)
+		if (e.which === 83)
 		{
 			naturalFall();
 		}
-		if (e.which == 87)
+		if (e.which === 87)
 		{
 			rotateClockwise();
 		}

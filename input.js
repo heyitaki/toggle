@@ -1,6 +1,6 @@
 function gameInput()
 {
-	this.mouseStates = new Array(3);
+	this.mouseStates = [];
 	this.mouseStates[0] = false;
 	this.mouseStates[1] = false;
 	this.mouseStates[2] = false;
@@ -27,5 +27,5 @@ gameInput.prototype.update = function()
 
 gameInput.prototype.wasMousePressed = function(button)
 {
-	return this.frameMouseStates[button] && (this.frameMouseStates[button] != this.lastFrameMouseStates[button]);
+	return this.frameMouseStates[button] && (this.frameMouseStates[button] !== this.lastFrameMouseStates[button]);
 };
