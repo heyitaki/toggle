@@ -25,21 +25,28 @@ jQuery(function($)
 		mainGame.updateScore();
 	});
 
+	var Keys = {
+		"A": 65,
+		"D": 68,
+		"S": 83,
+		"W": 87
+	};
+
 	$(window).keydown(function(e)
 	{
-		if (e.which === 65)
+		if (e.which === Keys.A)
 		{
 			moveLeft();
 		}
-		if (e.which === 68)
+		if (e.which === Keys.D)
 		{
 			moveRight();
 		}
-		if (e.which === 83)
+		if (e.which === Keys.S)
 		{
 			naturalFall();
 		}
-		if (e.which === 87)
+		if (e.which === Keys.W)
 		{
 			rotateClockwise();
 		}
