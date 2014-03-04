@@ -1,7 +1,7 @@
 jQuery(function($)
 {
 	var canvasOffset = $('#gameCanvas').offset();
-	mainGame = new game();
+	mainGame = new Game();
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
 

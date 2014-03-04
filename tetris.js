@@ -20,7 +20,7 @@ function intializeBlockArray()
 	{
 		for(var k = 0; k < 4; k++)
 		{
-			subField[j][k] = new gameSquare();
+			subField[j][k] = new GameSquare();
 		}
 	}
 }

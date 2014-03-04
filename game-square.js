@@ -1,4 +1,4 @@
-function gameSquare(i)
+function GameSquare(i)
 {
 	this.index = i;
 	this.hasTetris = false;

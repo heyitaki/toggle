@@ -1,4 +1,4 @@
-function gameGrid(theGame)
+function GameGrid(theGame)
 {
 	this.mainGame = theGame;
 	this.width = 10;
@@ -12,14 +12,14 @@ function gameGrid(theGame)
 	{
 		for (var j = 0; j < this.height; j++)
 		{
-			this.squares[i + j * this.height] = new gameSquare(i + j * this.height);
+			this.squares[i + j * this.height] = new GameSquare(i + j * this.height);
 		}
 	}
 
 	this.generateGrid();
 }
 
-gameGrid.prototype.generateGrid = function()
+GameGrid.prototype.generateGrid = function()
 {
 	var amountOfVowels = 0;
 	var amountOfConsonants = 0;
@@ -55,7 +55,7 @@ gameGrid.prototype.generateGrid = function()
 	
 };
 
-gameGrid.prototype.getRandomSquare = function()
+GameGrid.prototype.getRandomSquare = function()
 {
 	var rand;
 	do
@@ -66,21 +66,21 @@ gameGrid.prototype.getRandomSquare = function()
 	return this.squares[rand];
 };
 
-gameGrid.vowelArray = ['A', 'E', 'I', 'O', 'U'];
+GameGrid.vowelArray = ['A', 'E', 'I', 'O', 'U'];
 
-gameGrid.prototype.isVowel = function(letter)
+GameGrid.prototype.isVowel = function(letter)
 {
-	return $.inArray(letter, gameGrid.vowelArray) !== -1;
+	return $.inArray(letter, GameGrid.vowelArray) !== -1;
 };
 
-gameGrid.prototype.randVowel = function()
+GameGrid.prototype.randVowel = function()
 {
 	var rand = Math.random();
 	rand = Math.floor(rand * 5);
-	return gameGrid.vowelArray[rand];
+	return GameGrid.vowelArray[rand];
 };
 
-gameGrid.prototype.drawTetris = function(ctx)
+GameGrid.prototype.drawTetris = function(ctx)
 {
 	for (var i = 0; i < 4; i++)
 	{
@@ -93,7 +93,7 @@ gameGrid.prototype.drawTetris = function(ctx)
 	}
 };
 
-gameGrid.prototype.draw = function(ctx)
+GameGrid.prototype.draw = function(ctx)
 {
 	for (var i = 0; i < this.width; i++)
 	{
@@ -131,7 +131,7 @@ gameGrid.prototype.draw = function(ctx)
 	}
 	this.drawTetris(ctx);
 };
-gameGrid.prototype.numberOfOccurances = function(letter)
+GameGrid.prototype.numberOfOccurances = function(letter)
 {
 	var counter = 0;
 	for (var i = 0; i < this.squares.length; i++)
@@ -145,12 +145,12 @@ gameGrid.prototype.numberOfOccurances = function(letter)
 	return counter;
 };
 
-gameGrid.prototype.randChar = function()
+GameGrid.prototype.randChar = function()
 {
 	return String.fromCharCode(Math.floor((Math.random() * 26) + 1) + 64);
 };
 
-gameGrid.prototype.getSquareIndex = function(x, y)
+GameGrid.prototype.getSquareIndex = function(x, y)
 {
 	if (this.withinBounds(x, y))
 	{
@@ -168,18 +168,18 @@ gameGrid.prototype.getSquareIndex = function(x, y)
 	return -1;
 };
 
-gameGrid.prototype.getSquare = function(x, y)
+GameGrid.prototype.getSquare = function(x, y)
 {
 	var index = this.getSquareIndex(x, y);
-	return index === -1 ? new gameSquare(-1) : this.squares[index];
+	return index === -1 ? new GameSquare(-1) : this.squares[index];
 };
 
-gameGrid.prototype.selectSquare = function(x, y)
+GameGrid.prototype.selectSquare = function(x, y)
 {
 	this.getSquare(x, y).isSelected = true;
 };
 
-gameGrid.prototype.clearSelected = function()
+GameGrid.prototype.clearSelected = function()
 {
 	for (var i = 0; i < this.squares.length; i++)
 	{
@@ -187,7 +187,7 @@ gameGrid.prototype.clearSelected = function()
 	}
 };
 
-gameGrid.prototype.withinBounds = function(x, y)
+GameGrid.prototype.withinBounds = function(x, y)
 {
 	return x > this.mainGame.canvasOffsetX &&
 		y > this.mainGame.canvasOffsetY &&
@@ -195,12 +195,12 @@ gameGrid.prototype.withinBounds = function(x, y)
 		y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY;
 };
 
-gameGrid.prototype.checkSquare = function(index)
+GameGrid.prototype.checkSquare = function(index)
 {
 	return this.squares[index].hasTetris;
 };
 
-gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
+GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 {
 	var larger;
 	if (prevSquareIndex === -1)
@@ -241,7 +241,7 @@ gameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 	return false;
 };
 
-gameGrid.prototype.compilationUpdate = function(currSquareIndex)
+GameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
 	if(!this.checkSquare(currSquareIndex))
 	{
