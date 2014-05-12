@@ -9,7 +9,7 @@ function Game()
 	this.score = 0;
 	this.grid = new GameGrid(this);
 	this.input = new GameInput();
-	this.ctx = $('#gameCanvas')[0].getContext('2d');
+	this.ctx = $('#game-canvas')[0].getContext('2d');
 	this.previousSquare = 0;
 	this.word = [];
 
