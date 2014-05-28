@@ -8,7 +8,7 @@ function GameGrid(theGame)
 	this.lastHighestBlock = 0;
 	this.nowHighestBlock = 0;
 
-	for	(var i = 0; i < this.width; i++)
+	for (var i = 0; i < this.width; i++)
 	{
 		for (var j = 0; j < this.height; j++)
 		{
