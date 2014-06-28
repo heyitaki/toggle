@@ -7,18 +7,18 @@ jQuery(function($)
 
 	intializeBlockArray();
 	createNextBlock();
-	$(window).mousedown(function(e)
+	$(window).on('mousedown', function(e)
 	{
 		mainGame.input.mouseDown(e.button);
 	});
 	
-	$(window).mousemove(function(e)
+	$(window).on('mousemove', function(e)
 	{
 		mainGame.handleMouseInput(e.clientX, e.clientY);
 		console.log(mainGame.word);
 	});
 
-	$(window).mouseup(function(e)
+	$(window).on('mouseup', function(e)
 	{
 		mainGame.input.mouseUp(e.button);
 		mainGame.grid.clearSelected();
@@ -32,7 +32,7 @@ jQuery(function($)
 		"W": 87
 	};
 
-	$(window).keydown(function(e)
+	$(window).on('keydown', function(e)
 	{
 		if (e.which === Keys.A)
 		{
