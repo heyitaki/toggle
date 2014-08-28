@@ -15,7 +15,6 @@ jQuery(function($)
 	$(window).on("mousemove", function(e)
 	{
 		mainGame.handleMouseInput(e.clientX, e.clientY);
-		console.log(mainGame.word);
 	});
 
 	$(window).on("mouseup", function(e)
