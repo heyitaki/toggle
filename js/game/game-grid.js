@@ -175,7 +175,8 @@ GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex) {
 		return true;
 	}
 
-	if (currSquareIndex % this.width === 0 && prevSquareIndex % this.width === 9 || currSquareIndex % this.width === 9 && prevSquareIndex % this.width === 0) {
+	if (currSquareIndex % this.width === 0 && prevSquareIndex % this.width === 9 ||
+			currSquareIndex % this.width === 9 && prevSquareIndex % this.width === 0) {
 		return false;
 	}
 
