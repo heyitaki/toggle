@@ -33,8 +33,7 @@ GameGrid.prototype.generateGrid = function() {
 
 		if (this.isVowel(newChar)) {
 			amountOfVowels++;
-		}
-		else {
+		} else {
 			amountOfConsonants++;
 		}
 
@@ -71,8 +70,12 @@ GameGrid.prototype.drawTetris = function(ctx) {
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
 			ctx.fillStyle = "#0000FF";
-			if (subField[i][j].hasTetris)
-				ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
+			if (subField[i][j].hasTetris) {
+				ctx.fillRect((position.x + j) * this.mainGame.squareWidth + this.borderSize,
+					(position.y + i) * this.mainGame.squareHeight + this.borderSize,
+					this.mainGame.squareWidth - this.borderSize,
+					this.mainGame.squareHeight - this.borderSize);
+			}
 		}
 	}
 };
@@ -187,8 +190,7 @@ GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex) {
 		if (Math.abs(shiftedIndex - prevSquareIndex) <= 1) {
 			return true;
 		}
-	}
-	else {
+	} else {
 		larger = prevSquareIndex;
 		var shiftedIndex = larger - this.width;
 
@@ -205,17 +207,19 @@ GameGrid.prototype.compilationUpdate = function(currSquareIndex) {
 		this.mainGame.clearWord();
 		return;
 	}
+
 	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) !== -1) {
 		return;
 	}
+
 	if (this.mainGame.word.length === 0) {
 		this.mainGame.addLetter(currSquareIndex);
 		return;
 	}
+
 	if (this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex)) {
 		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
-	}
-	else {
+	} else {
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();
 	}

@@ -48,7 +48,7 @@ Game.prototype.addLetter = function(prevSquareIndex, currSquareIndex) {
 		this.grid.squares[prevSquareIndex].isSelected = true;
 		return;
 	}
-	if(this.grid.checkSquare(currSquareIndex) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex)) {
+	if (this.grid.checkSquare(currSquareIndex) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex)) {
 		this.word.push(this.grid.squares[currSquareIndex]);
 		this.grid.squares[currSquareIndex].isSelected = true;
 	}
@@ -76,8 +76,7 @@ Game.prototype.isWord = function() {
 	for (var i = 0; i < this.word.length; i++) {
 		if (i === 0) {
 			wordString += this.word[i].letter;
-		}
-		else {
+		} else {
 			wordString += this.word[i].letter.toLowerCase();
 		}
 	}

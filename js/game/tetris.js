@@ -87,8 +87,9 @@ function collision(direction) {
 function collidesWithWalls(direction) {
 	for (var j = 0; j < 4; j++) {
 		for (var k = 0; k < 4; k++) {
-			if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1)
+			if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1) {
 				return true;
+			}
 		}
 	}
 
@@ -99,12 +100,12 @@ function moveRight() {
 	var validMove = true;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (collidesWithWalls(1))
+			if (collidesWithWalls(1)) {
 				validMove = false;
+			}
 			if (collision(1)) {
 				validMove = false;
 			}
-
 		}
 	}
 	if (validMove) {
@@ -116,8 +117,9 @@ function place() {
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
 			var index = (position.x + i) + (position.y + j) * this.mainGame.grid.width;
-			if (index < mainGame.grid.width * mainGame.grid.height)
+			if (index < mainGame.grid.width * mainGame.grid.height) {
 				this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
+			}
 		}
 	}
 	clearField();
@@ -130,8 +132,9 @@ function leftestIndex() {
 	var leftest = 3;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && i < leftest)
+			if (subField[i][j].hasTetris && i < leftest) {
 				leftest = i;
+			}
 		}
 	}
 	return leftest;
@@ -141,8 +144,9 @@ function rightestIndex() {
 	var rightest = 8;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && i > rightest)
+			if (subField[i][j].hasTetris && i > rightest) {
 				rightest = i;
+			}
 		}
 	}
 	return rightest;
@@ -152,8 +156,9 @@ function bottomIndex() {
 	var bottomest = 1;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && j > bottomest)
+			if (subField[i][j].hasTetris && j > bottomest) {
 				bottomest = j;
+			}
 		}
 	}
 	return bottomest + position.y;
@@ -163,8 +168,9 @@ function moveLeft() {
 	var validMove = true;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (collidesWithWalls(-1))
-				validMove = false; else if (collision(-1)) {
+			if (collidesWithWalls(-1)) {
+				validMove = false;
+			} else if (collision(-1)) {
 				validMove = false;
 			}
 
@@ -178,7 +184,7 @@ function moveLeft() {
 function naturalFall() {
 	var validMove = true;
 	for (var i = 0; i < 4; i++) {
-		for(var j = 0; j < 4; j++) {
+		for (var j = 0; j < 4; j++) {
 			if (collision(0)) {
 				validMove = false;
 				place();
@@ -186,8 +192,9 @@ function naturalFall() {
 		}
 	}
 	if (validMove) {
-		if (bottomIndex() > mainGame.grid.height - 2)
+		if (bottomIndex() > mainGame.grid.height - 2) {
 			place();
+		}
 		this.position.y++;
 	}
 }
