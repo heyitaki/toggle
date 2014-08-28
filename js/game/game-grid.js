@@ -1,5 +1,4 @@
-function GameGrid(theGame)
-{
+function GameGrid(theGame) {
 	this.mainGame = theGame;
 	this.width = 10;
 	this.height = 10;
@@ -8,10 +7,8 @@ function GameGrid(theGame)
 	this.lastHighestBlock = 0;
 	this.nowHighestBlock = 0;
 
-	for (var i = 0; i < this.width; i++)
-	{
-		for (var j = 0; j < this.height; j++)
-		{
+	for (var i = 0; i < this.width; i++) {
+		for (var j = 0; j < this.height; j++) {
 			this.squares[i + j * this.height] = new GameSquare(i + j * this.height);
 		}
 	}
@@ -19,47 +16,39 @@ function GameGrid(theGame)
 	this.generateGrid();
 }
 
-GameGrid.prototype.generateGrid = function()
-{
+GameGrid.prototype.generateGrid = function() {
 	var amountOfVowels = 0;
 	var amountOfConsonants = 0;
 	var percentVowels = 0;
 	var nextIsVowel = false;
 
-	for (var i = 0; i < this.squares.length; i++)
-	{
+	for (var i = 0; i < this.squares.length; i++) {
 		var newChar = this.randChar();
-		if (nextIsVowel)
-		{
+		if (nextIsVowel) {
 			newChar = this.randVowel();
 			nextIsVowel = false;
 		}
 
 		this.squares[i].letter = newChar;
 
-		if (this.isVowel(newChar))
-		{
+		if (this.isVowel(newChar)) {
 			amountOfVowels++;
 		}
-		else
-		{
+		else {
 			amountOfConsonants++;
 		}
 
 		percentVowels = amountOfVowels / (amountOfVowels + amountOfConsonants);
-		if (percentVowels < 0.4)
-		{
+		if (percentVowels < 0.4) {
 			nextIsVowel = true;
 		}
 	}
 
 };
 
-GameGrid.prototype.getRandomSquare = function()
-{
+GameGrid.prototype.getRandomSquare = function() {
 	var rand;
-	do
-	{
+	do {
 		rand = Math.random();
 		rand = Math.floor(rand * this.squares.length);
 	} while (this.isVowel(this.squares[rand].letter));
@@ -68,24 +57,19 @@ GameGrid.prototype.getRandomSquare = function()
 
 GameGrid.vowelArray = ["A", "E", "I", "O", "U"];
 
-GameGrid.prototype.isVowel = function(letter)
-{
+GameGrid.prototype.isVowel = function(letter) {
 	return $.inArray(letter, GameGrid.vowelArray) !== -1;
 };
 
-GameGrid.prototype.randVowel = function()
-{
+GameGrid.prototype.randVowel = function() {
 	var rand = Math.random();
 	rand = Math.floor(rand * 5);
 	return GameGrid.vowelArray[rand];
 };
 
-GameGrid.prototype.drawTetris = function(ctx)
-{
-	for (var i = 0; i < 4; i++)
-	{
-		for (var j = 0; j < 4; j++)
-		{
+GameGrid.prototype.drawTetris = function(ctx) {
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 4; j++) {
 			ctx.fillStyle = "#0000FF";
 			if (subField[i][j].hasTetris)
 				ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
@@ -93,12 +77,9 @@ GameGrid.prototype.drawTetris = function(ctx)
 	}
 };
 
-GameGrid.prototype.draw = function(ctx)
-{
-	for (var i = 0; i < this.width; i++)
-	{
-		for (var j = 0; j < this.height; j++)
-		{
+GameGrid.prototype.draw = function(ctx) {
+	for (var i = 0; i < this.width; i++) {
+		for (var j = 0; j < this.height; j++) {
 			var coordX = i * this.mainGame.squareWidth;
 			var coordY = j * this.mainGame.squareHeight;
 			var square = this.squares[i + j * this.height];
@@ -108,18 +89,15 @@ GameGrid.prototype.draw = function(ctx)
 
 			var special = false;
 
-			if (square.hasTetris)
-			{
+			if (square.hasTetris) {
 				ctx.fillStyle = "#000000";
 				special = true;
 			}
-			if (square.isSelected)
-			{
+			if (square.isSelected) {
 				ctx.fillStyle = square.selectedColor;
 				special = true;
 			}
-			if (!special)
-			{
+			if (!special) {
 				ctx.fillStyle = square.color;
 			}
 
@@ -131,13 +109,10 @@ GameGrid.prototype.draw = function(ctx)
 	}
 	this.drawTetris(ctx);
 };
-GameGrid.prototype.numberOfOccurances = function(letter)
-{
+GameGrid.prototype.numberOfOccurances = function(letter) {
 	var counter = 0;
-	for (var i = 0; i < this.squares.length; i++)
-	{
-		if (this.squares[i].letter === letter)
-		{
+	for (var i = 0; i < this.squares.length; i++) {
+		if (this.squares[i].letter === letter) {
 			counter++;
 		}
 	}
@@ -145,15 +120,12 @@ GameGrid.prototype.numberOfOccurances = function(letter)
 	return counter;
 };
 
-GameGrid.prototype.randChar = function()
-{
+GameGrid.prototype.randChar = function() {
 	return String.fromCharCode(Math.floor((Math.random() * 26) + 1) + 64);
 };
 
-GameGrid.prototype.getSquareIndex = function(x, y)
-{
-	if (this.withinBounds(x, y))
-	{
+GameGrid.prototype.getSquareIndex = function(x, y) {
+	if (this.withinBounds(x, y)) {
 		x -= this.mainGame.canvasOffsetX;
 		y -= this.mainGame.canvasOffsetY;
 
@@ -168,102 +140,82 @@ GameGrid.prototype.getSquareIndex = function(x, y)
 	return -1;
 };
 
-GameGrid.prototype.getSquare = function(x, y)
-{
+GameGrid.prototype.getSquare = function(x, y) {
 	var index = this.getSquareIndex(x, y);
 	return index === -1 ? new GameSquare(-1) : this.squares[index];
 };
 
-GameGrid.prototype.selectSquare = function(x, y)
-{
+GameGrid.prototype.selectSquare = function(x, y) {
 	this.getSquare(x, y).isSelected = true;
 };
 
-GameGrid.prototype.clearSelected = function()
-{
-	for (var i = 0; i < this.squares.length; i++)
-	{
+GameGrid.prototype.clearSelected = function() {
+	for (var i = 0; i < this.squares.length; i++) {
 		this.squares[i].isSelected = false;
 	}
 };
 
-GameGrid.prototype.withinBounds = function(x, y)
-{
+GameGrid.prototype.withinBounds = function(x, y) {
 	return x > this.mainGame.canvasOffsetX &&
 		y > this.mainGame.canvasOffsetY &&
 		x < this.width * this.mainGame.squareWidth + this.mainGame.canvasOffsetX &&
 		y < this.height * this.mainGame.squareHeight + this.mainGame.canvasOffsetY;
 };
 
-GameGrid.prototype.checkSquare = function(index)
-{
+GameGrid.prototype.checkSquare = function(index) {
 	return this.squares[index].hasTetris;
 };
 
-GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
-{
+GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex) {
 	var larger;
-	if (prevSquareIndex === -1)
-	{
+	if (prevSquareIndex === -1) {
 		return true;
 	}
 
-	if (currSquareIndex % this.width === 0 && prevSquareIndex % this.width === 9 || currSquareIndex % this.width === 9 && prevSquareIndex % this.width === 0)
-	{
+	if (currSquareIndex % this.width === 0 && prevSquareIndex % this.width === 9 || currSquareIndex % this.width === 9 && prevSquareIndex % this.width === 0) {
 		return false;
 	}
 
-	if (Math.abs(currSquareIndex - prevSquareIndex) === 1)
-	{
+	if (Math.abs(currSquareIndex - prevSquareIndex) === 1) {
 		return true;
 	}
 
-	if (prevSquareIndex < currSquareIndex)
-	{
+	if (prevSquareIndex < currSquareIndex) {
 		larger = currSquareIndex;
 		var shiftedIndex = larger - this.width;
 
-		if (Math.abs(shiftedIndex - prevSquareIndex) <= 1)
-		{
+		if (Math.abs(shiftedIndex - prevSquareIndex) <= 1) {
 			return true;
 		}
 	}
-	else
-	{
+	else {
 		larger = prevSquareIndex;
 		var shiftedIndex = larger - this.width;
 
-		if (Math.abs(shiftedIndex - currSquareIndex) <= 1)
-		{
+		if (Math.abs(shiftedIndex - currSquareIndex) <= 1) {
 			return true;
 		}
 	}
 	return false;
 };
 
-GameGrid.prototype.compilationUpdate = function(currSquareIndex)
-{
-	if (!this.checkSquare(currSquareIndex))
-	{
+GameGrid.prototype.compilationUpdate = function(currSquareIndex) {
+	if (!this.checkSquare(currSquareIndex)) {
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();
 		return;
 	}
-	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) !== -1)
-	{
+	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) !== -1) {
 		return;
 	}
-	if (this.mainGame.word.length === 0)
-	{
+	if (this.mainGame.word.length === 0) {
 		this.mainGame.addLetter(currSquareIndex);
 		return;
 	}
-	if (this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))
-	{
+	if (this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex)) {
 		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
 	}
-	else
-	{
+	else {
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();
 	}

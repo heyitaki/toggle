@@ -1,5 +1,4 @@
-jQuery(function($)
-{
+jQuery(function($) {
 	var canvasOffset = $("#game-canvas").offset();
 	mainGame = new Game();
 	mainGame.canvasOffsetX = canvasOffset.left;
@@ -7,18 +6,15 @@ jQuery(function($)
 
 	intializeBlockArray();
 	createNextBlock();
-	$(window).on("mousedown", function(e)
-	{
+	$(window).on("mousedown", function(e) {
 		mainGame.input.mouseDown(e.button);
 	});
 
-	$(window).on("mousemove", function(e)
-	{
+	$(window).on("mousemove", function(e) {
 		mainGame.handleMouseInput(e.clientX, e.clientY);
 	});
 
-	$(window).on("mouseup", function(e)
-	{
+	$(window).on("mouseup", function(e) {
 		mainGame.input.mouseUp(e.button);
 		mainGame.grid.clearSelected();
 		mainGame.updateScore();
@@ -31,8 +27,7 @@ jQuery(function($)
 		"W": 87
 	};
 
-	$(window).on("keydown", function(e)
-	{
+	$(window).on("keydown", function(e) {
 		switch (e.which) {
 			case Keys.A:
 				moveLeft();
@@ -53,8 +48,7 @@ jQuery(function($)
 	});
 
 	mainGame.setUpCanvas();
-	setInterval(function()
-	{
+	setInterval(function() {
 		naturalFall();
 	}, 3000);
 	setInterval(tick, 2);
