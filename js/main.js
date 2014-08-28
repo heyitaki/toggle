@@ -33,21 +33,22 @@ jQuery(function($)
 
 	$(window).on("keydown", function(e)
 	{
-		if (e.which === Keys.A)
-		{
-			moveLeft();
-		}
-		if (e.which === Keys.D)
-		{
-			moveRight();
-		}
-		if (e.which === Keys.S)
-		{
-			naturalFall();
-		}
-		if (e.which === Keys.W)
-		{
-			rotateClockwise();
+		switch (e.which) {
+			case Keys.A:
+				moveLeft();
+				break;
+
+			case Keys.D:
+				moveRight();
+				break;
+
+			case Keys.S:
+				naturalFall();
+				break;
+
+			case Keys.W:
+				rotateClockwise();
+				break;
 		}
 	});
 
