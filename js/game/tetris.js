@@ -302,7 +302,7 @@ function tetris()
 			}
 		}
 		mainGame.score += 133;
-		$('#score').html(mainGame.score);
+		$("#score").html(mainGame.score);
 	}
 }
 

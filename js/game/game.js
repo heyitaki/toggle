@@ -9,7 +9,7 @@ function Game()
 	this.score = 0;
 	this.grid = new GameGrid(this);
 	this.input = new GameInput();
-	this.ctx = $('#game-canvas')[0].getContext('2d');
+	this.ctx = $("#game-canvas")[0].getContext("2d");
 	this.previousSquare = 0;
 	this.word = [];
 
@@ -27,7 +27,7 @@ Game.prototype.update = function()
 
 Game.prototype.draw = function()
 {
-	this.ctx.fillStyle = '#ADADAD';
+	this.ctx.fillStyle = "#ADADAD";
 	this.ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight);
 	this.grid.draw(this.ctx);
 };
@@ -80,7 +80,7 @@ Game.prototype.updateScore = function()
 			this.score += this.alphabetPoints[asciiCode - 65] * 15;
 		}
 
-		$('#score').html(this.score);
+		$("#score").html(this.score);
 	}
 };
 

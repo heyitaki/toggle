@@ -4,7 +4,7 @@ function GameGrid(theGame)
 	this.width = 10;
 	this.height = 10;
 	this.borderSize = 5;
-	this.squares = new Array(this.width * this.height);
+	this.squares = [];
 	this.lastHighestBlock = 0;
 	this.nowHighestBlock = 0;
 
@@ -34,7 +34,7 @@ GameGrid.prototype.generateGrid = function()
 			newChar = this.randVowel();
 			nextIsVowel = false;
 		}
-	
+
 		this.squares[i].letter = newChar;
 
 		if (this.isVowel(newChar))
@@ -52,7 +52,7 @@ GameGrid.prototype.generateGrid = function()
 			nextIsVowel = true;
 		}
 	}
-	
+
 };
 
 GameGrid.prototype.getRandomSquare = function()
@@ -66,7 +66,7 @@ GameGrid.prototype.getRandomSquare = function()
 	return this.squares[rand];
 };
 
-GameGrid.vowelArray = ['A', 'E', 'I', 'O', 'U'];
+GameGrid.vowelArray = ["A", "E", "I", "O", "U"];
 
 GameGrid.prototype.isVowel = function(letter)
 {
@@ -86,7 +86,7 @@ GameGrid.prototype.drawTetris = function(ctx)
 	{
 		for (var j = 0; j < 4; j++)
 		{
-			ctx.fillStyle = '#0000FF';
+			ctx.fillStyle = "#0000FF";
 			if (subField[i][j].hasTetris)
 				ctx.fillRect( (position.x + j)* this.mainGame.squareWidth + this.borderSize, (position.y + i) * this.mainGame.squareHeight + this.borderSize, this.mainGame.squareWidth - this.borderSize, this.mainGame.squareHeight - this.borderSize);
 		}
@@ -105,12 +105,12 @@ GameGrid.prototype.draw = function(ctx)
 
 			ctx.font = "30px sans-serif";
 			ctx.textAllign = "center";
-			
+
 			var special = false;
-		
+
 			if (square.hasTetris)
 			{
-				ctx.fillStyle = '#000000';
+				ctx.fillStyle = "#000000";
 				special = true;
 			}
 			if (square.isSelected)
@@ -159,10 +159,10 @@ GameGrid.prototype.getSquareIndex = function(x, y)
 
 		x = Math.floor(x);
 		y = Math.floor(y);
-		
+
 		x -= x % this.mainGame.squareWidth;
 		y -= y % this.mainGame.squareHeight;
-		
+
 		return x / this.mainGame.squareWidth + y / this.mainGame.squareHeight * this.height;
 	}
 	return -1;

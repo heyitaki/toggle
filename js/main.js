@@ -1,24 +1,24 @@
 jQuery(function($)
 {
-	var canvasOffset = $('#game-canvas').offset();
+	var canvasOffset = $("#game-canvas").offset();
 	mainGame = new Game();
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
 
 	intializeBlockArray();
 	createNextBlock();
-	$(window).on('mousedown', function(e)
+	$(window).on("mousedown", function(e)
 	{
 		mainGame.input.mouseDown(e.button);
 	});
-	
-	$(window).on('mousemove', function(e)
+
+	$(window).on("mousemove", function(e)
 	{
 		mainGame.handleMouseInput(e.clientX, e.clientY);
 		console.log(mainGame.word);
 	});
 
-	$(window).on('mouseup', function(e)
+	$(window).on("mouseup", function(e)
 	{
 		mainGame.input.mouseUp(e.button);
 		mainGame.grid.clearSelected();
@@ -32,7 +32,7 @@ jQuery(function($)
 		"W": 87
 	};
 
-	$(window).on('keydown', function(e)
+	$(window).on("keydown", function(e)
 	{
 		if (e.which === Keys.A)
 		{
