@@ -209,17 +209,17 @@ GameGrid.prototype.compilationUpdate = function(currSquareIndex) {
 		return;
 	}
 
-	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) !== -1) {
+	if (this.mainGame.wordLetters.indexOf(this.squares[currSquareIndex]) !== -1) {
 		return;
 	}
 
-	if (this.mainGame.word.length === 0) {
+	if (this.mainGame.wordLetters.length === 0) {
 		this.mainGame.addLetter(currSquareIndex);
 		return;
 	}
 
-	if (this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex)) {
-		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
+	if (this.isAdjacent(this.mainGame.wordLetters[this.mainGame.wordLetters.length - 1].index, currSquareIndex)) {
+		this.mainGame.addLetter(this.mainGame.wordLetters[this.mainGame.wordLetters.length - 1].index, currSquareIndex);
 	} else {
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();

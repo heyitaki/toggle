@@ -10,7 +10,8 @@ function Game() {
 	this.input = new GameInput();
 	this.ctx = $("#game-canvas")[0].getContext("2d");
 	this.previousSquare = 0;
-	this.word = [];
+	this.wordLetters = [];
+	this.wordsFound = [];
 
 	this.currentSquare = 0;
 	this.previousSquare = 0;
@@ -44,25 +45,30 @@ Game.prototype.setUpCanvas = function() {
 
 Game.prototype.addLetter = function(prevSquareIndex, currSquareIndex) {
 	if (currSquareIndex === undefined) {
-		this.word.push(this.grid.squares[prevSquareIndex]);
+		this.wordLetters.push(this.grid.squares[prevSquareIndex]);
 		this.grid.squares[prevSquareIndex].isSelected = true;
 		return;
 	}
 	if (this.grid.checkSquare(currSquareIndex) && this.grid.isAdjacent(prevSquareIndex, currSquareIndex)) {
-		this.word.push(this.grid.squares[currSquareIndex]);
+		this.wordLetters.push(this.grid.squares[currSquareIndex]);
 		this.grid.squares[currSquareIndex].isSelected = true;
 	}
 };
 
 Game.prototype.clearWord = function() {
-	this.word = [];
+	this.wordLetters = [];
 	this.grid.clearSelected();
 };
 
 Game.prototype.updateScore = function() {
-	if (this.isWord()) {
-		for (var i = 0; i < this.word.length; i++) {
-			var letter = this.word[i].letter;
+	var word = WordFuncs.constructWord(this.wordLetters);
+
+	if (WordFuncs.isWord(legalDict, word) &&
+			this.wordsFound.indexOf(word) === -1) {
+		this.wordsFound.push(word);
+
+		for (var i = 0; i < this.wordLetters.length; i++) {
+			var letter = this.wordLetters[i].letter;
 			var asciiCode = letter.charCodeAt(0);
 			this.score += this.alphabetPoints[asciiCode - 65] * 15;
 		}
@@ -71,16 +77,22 @@ Game.prototype.updateScore = function() {
 	}
 };
 
-Game.prototype.isWord = function() {
-	var wordString = "";
-	for (var i = 0; i < this.word.length; i++) {
-		if (i === 0) {
-			wordString += this.word[i].letter;
-		} else {
-			wordString += this.word[i].letter.toLowerCase();
+var WordFuncs = {
+	constructWord: function(gameLetters) {
+		var word = "";
+		for (var i = 0; i < gameLetters.length; i++) {
+			if (i === 0) {
+				word += gameLetters[i].letter;
+			} else {
+				word += gameLetters[i].letter.toLowerCase();
+			}
 		}
+
+		return word;
+	},
+	isWord: function(dictionary, word) {
+		return dictionary.indexOf(word) !== -1;
 	}
-	return dict.indexOf(wordString) !== -1;
 };
 
 function tick() {
