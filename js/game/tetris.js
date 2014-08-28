@@ -1,4 +1,4 @@
-var subField = new Array(4);
+var subField = [];
 var rotation = 0;
 var blockType = 0;
 
@@ -10,17 +10,12 @@ var position = {
 function intializeBlockArray()
 {
 	//4x4 array
-	subField = new Array(4);
-	for (var i = 0; i < 4; i++)
+	for (var i = 0; i < 4; j++)
 	{
-		subField[i] = new Array(4);
-	}
-
-	for (var j = 0; j < 4; j++)
-	{
-		for(var k = 0; k < 4; k++)
+		subField[i] = [];
+		for (var j = 0; j < 4; k++)
 		{
-			subField[j][k] = new GameSquare();
+			subField[i][j] = new GameSquare();
 		}
 	}
 }
@@ -43,70 +38,70 @@ function highestBlock()
 function createNextBlock()
 {
 	//new tetromino
-    var i = Math.floor((Math.random() * 7) + 1);
-    blockType = i;
-    rotation = 0;
-    if (i === 1) //O
-    {
-        subField[1][1].hasTetris = true;
-        subField[1][2].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[2][2].hasTetris = true;
-    }
-    else if (i === 2) //Y
-    {
-        subField[3][0].hasTetris = true;
-        subField[3][1].hasTetris = true;
-    }
-    else if (i === 3) //T
-    {
-        subField[2][0].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[2][2].hasTetris = true;
-        subField[1][1].hasTetris = true;
-    }
-    else if (i === 4) //L
-    {
-        subField[2][0].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[2][2].hasTetris = true;
-        subField[1][2].hasTetris = true;
-    }
-    else if (i === 5) //J
-    {
-        subField[1][0].hasTetris = true;
-        subField[2][0].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[2][2].hasTetris = true;
-    }
-    else if (i === 6) //S
-    {
-        subField[2][0].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[1][1].hasTetris = true;
-        subField[1][2].hasTetris = true;
-    }
-    else if (i === 7) //Z
-    {
-        subField[1][0].hasTetris = true;
-        subField[1][1].hasTetris = true;
-        subField[2][1].hasTetris = true;
-        subField[2][2].hasTetris = true;
-    }
+	var i = Math.floor((Math.random() * 7) + 1);
+	blockType = i;
+	rotation = 0;
+	if (i === 1) //O
+	{
+		subField[1][1].hasTetris = true;
+		subField[1][2].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+	}
+	else if (i === 2) //Y
+	{
+		subField[3][0].hasTetris = true;
+		subField[3][1].hasTetris = true;
+	}
+	else if (i === 3) //T
+	{
+		subField[2][0].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+		subField[1][1].hasTetris = true;
+	}
+	else if (i === 4) //L
+	{
+		subField[2][0].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+		subField[1][2].hasTetris = true;
+	}
+	else if (i === 5) //J
+	{
+		subField[1][0].hasTetris = true;
+		subField[2][0].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+	}
+	else if (i === 6) //S
+	{
+		subField[2][0].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[1][1].hasTetris = true;
+		subField[1][2].hasTetris = true;
+	}
+	else if (i === 7) //Z
+	{
+		subField[1][0].hasTetris = true;
+		subField[1][1].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+	}
 }
 
 function collision(direction)
 {
 	for (var j = 0; j < 4; j++)
 	{
-		for(var k = 0; k < 4; k++)
+		for (var k = 0; k < 4; k++)
 		{
 			if (subField[k][j].hasTetris)
 			{
 				var index = j + position.x + (k + position.y + 1) * mainGame.grid.width + direction;
-				if (index < mainGame.grid.width * mainGame.grid.height)
-				if (mainGame.grid.squares[index].hasTetris)
-					return true;
+				if (index < mainGame.grid.width * mainGame.grid.height && mainGame.grid.squares[index].hasTetris) {
+						return true;
+				}
 			}
 		}
 	}
@@ -118,7 +113,7 @@ function collidesWithWalls(direction)
 {
 	for (var j = 0; j < 4; j++)
 	{
-		for(var k = 0; k < 4; k++)
+		for (var k = 0; k < 4; k++)
 		{
 			if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1)
 				return true;
@@ -141,7 +136,7 @@ function moveRight()
 			{
 				validMove = false;
 			}
-	
+
 		}
 	}
 	if (validMove)
@@ -158,7 +153,7 @@ function place()
 		{
 			var index = (position.x + i) + (position.y + j) * this.mainGame.grid.width;
 			if (index < mainGame.grid.width * mainGame.grid.height)
-			this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
+				this.mainGame.grid.squares[index].hasTetris = subField[j][i].hasTetris || this.mainGame.grid.squares[index].hasTetris;
 		}
 	}
 	clearField();
@@ -214,7 +209,7 @@ function moveLeft()
 	var validMove = true;
 	for (var i = 0; i < 4; i++)
 	{
-		for(var j = 0; j < 4; j++)
+		for (var j = 0; j < 4; j++)
 		{
 			if (collidesWithWalls(-1))
 				validMove = false;
@@ -222,7 +217,7 @@ function moveLeft()
 			{
 				validMove = false;
 			}
-	
+
 		}
 	}
 	if (validMove)
@@ -258,43 +253,42 @@ function tetris()
 	var startSquares = [];
 	var isTetris;
 	var rowTetris;
-	
-	for(var i = 0; i < mainGame.grid.squares.length; i++)
+
+	for (var i = 0; i < mainGame.grid.squares.length; i++)
 	{
-		if(i % mainGame.grid.width === 0)
+		if (i % mainGame.grid.width === 0)
 		{
 			startSquares.push(mainGame.grid.squares[i]);
 		}
 	}
 
-	for(var i = 0; i < startSquares.length; i++)
+	for (var i = 0; i < startSquares.length; i++)
 	{
 		isTetris = true;
-		for(var j = 0; j < mainGame.grid.width; j++)
+		for (var j = 0; j < mainGame.grid.width; j++)
 		{
-			if(!mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
+			if (!mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
 			{
 				isTetris = false;
 			}
 		}
-		if(isTetris)
+		if (isTetris)
 		{
 			rowTetris = i;
 		}
 	}
-	if(isTetris)
+	if (isTetris)
 	{
-		for(var j = 0; j < mainGame.grid.width; j++)
+		for (var j = 0; j < mainGame.grid.width; j++)
 		{
 			mainGame.grid.squares[rowTetris * mainGame.grid.width + j].hasTetris = false;
 		}
-		
 
-		for(var i = rowTetris - 1; i >= 0; i--)
+		for (var i = rowTetris - 1; i >= 0; i--)
 		{
-			for(var j = 0; j < mainGame.grid.width; j++)
+			for (var j = 0; j < mainGame.grid.width; j++)
 			{
-				if(mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
+				if (mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris)
 				{
 					mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris = false;
 					mainGame.grid.squares[(i + 1) * mainGame.grid.width + j].hasTetris = true;
@@ -526,7 +520,7 @@ function clearField()
 {
 	for (var j = 0; j < 4; j++)
 	{
-		for(var k = 0; k < 4; k++)
+		for (var k = 0; k < 4; k++)
 		{
 			subField[j][k].hasTetris = false;
 		}

@@ -1,9 +1,6 @@
 function GameInput()
 {
-	this.mouseStates = [];
-	this.mouseStates[0] = false;
-	this.mouseStates[1] = false;
-	this.mouseStates[2] = false;
+	this.mouseStates = [false, false, false];
 
 	this.frameMouseStates = this.mouseStates.slice(0);
 	this.lastFrameMouseStates = this.mouseStates.slice(0);
