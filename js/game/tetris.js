@@ -41,6 +41,8 @@ function createNextBlock() {
 	} else if (i === 2) { // Y
 		subField[3][0].hasTetris = true;
 		subField[3][1].hasTetris = true;
+		subField[3][2].hasTetris = true;
+		subField[3][3].hasTetris = true;
 	} else if (i === 3) { // T
 		subField[2][0].hasTetris = true;
 		subField[2][1].hasTetris = true;
