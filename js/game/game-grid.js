@@ -62,7 +62,7 @@ GameGrid.prototype.getRandomSquare = function()
 	{
 		rand = Math.random();
 		rand = Math.floor(rand * this.squares.length);
-	} while(this.isVowel(this.squares[rand].letter));
+	} while (this.isVowel(this.squares[rand].letter));
 	return this.squares[rand];
 };
 
@@ -243,13 +243,13 @@ GameGrid.prototype.isAdjacent = function(prevSquareIndex, currSquareIndex)
 
 GameGrid.prototype.compilationUpdate = function(currSquareIndex)
 {
-	if(!this.checkSquare(currSquareIndex))
+	if (!this.checkSquare(currSquareIndex))
 	{
 		this.mainGame.updateScore();
 		this.mainGame.clearWord();
 		return;
 	}
-	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) > -1)
+	if (this.mainGame.word.indexOf(this.squares[currSquareIndex]) !== -1)
 	{
 		return;
 	}
@@ -258,7 +258,7 @@ GameGrid.prototype.compilationUpdate = function(currSquareIndex)
 		this.mainGame.addLetter(currSquareIndex);
 		return;
 	}
-	if(this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))
+	if (this.isAdjacent(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex))
 	{
 		this.mainGame.addLetter(this.mainGame.word[this.mainGame.word.length - 1].index, currSquareIndex);
 	}
