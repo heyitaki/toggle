@@ -4,16 +4,16 @@ var blockType = 0;
 
 var position = {
 	x: 0,
-	y: 0,
+	y: 0
 };
 
 function intializeBlockArray()
 {
 	//4x4 array
-	for (var i = 0; i < 4; j++)
+	for (var i = 0; i < 4; i++)
 	{
 		subField[i] = [];
-		for (var j = 0; j < 4; k++)
+		for (var j = 0; j < 4; j++)
 		{
 			subField[i][j] = new GameSquare();
 		}

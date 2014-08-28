@@ -16,7 +16,7 @@ function Game()
 	this.currentSquare = 0;
 	this.previousSquare = 0;
 
-	this.alphabetPoints = [1,3,3,3,1,3,2,4,2,5,4,3,4,2,2,2,9,2,2,2,4,4,3,9,4,11];
+	this.alphabetPoints = [1, 3, 3, 3, 1, 3, 2, 4, 2, 5, 4, 3, 4, 2, 2, 2, 9, 2, 2, 2, 4, 4, 3, 9, 4, 11];
 }
 
 Game.prototype.update = function()
