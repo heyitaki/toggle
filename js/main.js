@@ -6,19 +6,19 @@ jQuery(function($) {
 
 	intializeBlockArray();
 	createNextBlock();
-	$(window).on("mousedown", function(e) {
-		mainGame.input.mouseDown(e.button);
-	});
 
-	$(window).on("mousemove", function(e) {
-		mainGame.handleMouseInput(e.clientX, e.clientY);
-	});
-
-	$(window).on("mouseup", function(e) {
-		mainGame.input.mouseUp(e.button);
-		mainGame.grid.clearSelected();
-		mainGame.updateScore();
-	});
+	$(window)
+		.on("mousedown", function(e) {
+			mainGame.input.mouseDown(e.button);
+		})
+		.on("mousemove", function(e) {
+			mainGame.handleMouseInput(e.clientX, e.clientY);
+		})
+		.on("mouseup", function(e) {
+			mainGame.input.mouseUp(e.button);
+			mainGame.grid.clearSelected();
+			mainGame.updateScore();
+		});
 
 	var Keys = {
 		"A": 65,
