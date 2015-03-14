@@ -24,24 +24,32 @@ jQuery(function($) {
 		"A": 65,
 		"D": 68,
 		"S": 83,
-		"W": 87
+		"W": 87,
+		"Left": 37,
+		"Right": 39,
+		"Down": 40,
+		"Up": 38
 	};
 
 	$(window).on("keydown", function(e) {
 		switch (e.which) {
 			case Keys.A:
+			case Keys.Left:
 				moveLeft();
 				break;
 
 			case Keys.D:
+			case Keys.Right:
 				moveRight();
 				break;
 
 			case Keys.S:
+			case Keys.Down:
 				naturalFall();
 				break;
 
 			case Keys.W:
+			case Keys.Left:
 				rotateClockwise();
 				break;
 		}
