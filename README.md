@@ -1,12 +1,14 @@
 Tetrament
 =========
 
-Controls:
-W/↑: Rotate piece clockwise
-A/←: Move piece left
-S/↓: Quick drop
-D/→: Move piece right
-Mouse: Click and drag to form words
+Controls: 
+
+W/↑: Rotate piece clockwise 
+
+A/←: Move piece left 
+S/↓: Quick drop 
+D/→: Move piece right 
+Mouse: Click and drag to form words 
 
 Tetrament is a combination of the games Tetris and Boggle. 
 
@@ -16,4 +18,4 @@ You can gain points by clearing lines with the Tetris blocks and/or making words
 
 Don't let the blocks reach the top of the screen!
 
-[Test out the game here:](http://entyre.github.io/Tetrament/)
+[Test out the game here.](http://entyre.github.io/Tetrament/)
