@@ -16,4 +16,4 @@ You can gain points by clearing lines with the Tetris blocks and/or making words
 
 Don't let the blocks reach the top of the screen!
 
-[Test out the game here.](http://entyre.github.io/Tetrament/)
+[Test out the game here.](http://akshaths.github.io/Tetrament/)
