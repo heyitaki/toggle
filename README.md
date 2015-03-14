@@ -1,13 +1,11 @@
 Tetrament
 =========
 
-Controls: 
-
-W/↑: Rotate piece clockwise 
-
-A/←: Move piece left 
-S/↓: Quick drop 
-D/→: Move piece right 
+Controls:  
+W/↑: Rotate piece clockwise  
+A/←: Move piece left  
+S/↓: Quick drop  
+D/→: Move piece right  
 Mouse: Click and drag to form words 
 
 Tetrament is a combination of the games Tetris and Boggle. 
