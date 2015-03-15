@@ -16,7 +16,7 @@ function Game() {
 	this.currentSquare = 0;
 	this.previousSquare = 0;
 
-	this.alphabetPoints = [1, 3, 3, 3, 1, 3, 2, 4, 2, 5, 4, 3, 4, 2, 2, 2, 9, 2, 2, 2, 4, 4, 3, 9, 4, 11];
+	this.alphabetPoints = [1, 3, 3, 2, 1, 4, 2, 4, 1, 8, 5, 1, 3, 1, 1, 3, 10, 1, 1, 1, 1, 4, 4, 8, 4, 10];
 }
 
 Game.prototype.update = function() {
@@ -70,7 +70,7 @@ Game.prototype.updateScore = function() {
 		for (var i = 0; i < this.wordLetters.length; i++) {
 			var letter = this.wordLetters[i].letter;
 			var asciiCode = letter.charCodeAt(0);
-			this.score += this.alphabetPoints[asciiCode - 65] * 15;
+			this.score += this.alphabetPoints[asciiCode - 65] * 10;
 		}
 
 		$("#score").html(this.score);

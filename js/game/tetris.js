@@ -38,7 +38,7 @@ function createNextBlock() {
 		subField[1][2].hasTetris = true;
 		subField[2][1].hasTetris = true;
 		subField[2][2].hasTetris = true;
-	} else if (i === 2) { // Y
+	} else if (i === 2) { // I
 		subField[3][0].hasTetris = true;
 		subField[3][1].hasTetris = true;
 		subField[3][2].hasTetris = true;
@@ -89,30 +89,15 @@ function collision(direction) {
 function collidesWithWalls(direction) {
 	for (var j = 0; j < 4; j++) {
 		for (var k = 0; k < 4; k++) {
-			if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1) {
-				return true;
+			if (subField[k][j].hasTetris) {
+				if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1) {
+					return true;
+				}
 			}
 		}
 	}
 
 	return false;
-}
-
-function moveRight() {
-	var validMove = true;
-	for (var i = 0; i < 4; i++) {
-		for (var j = 0; j < 4; j++) {
-			if (collidesWithWalls(1)) {
-				validMove = false;
-			}
-			if (collision(1)) {
-				validMove = false;
-			}
-		}
-	}
-	if (validMove) {
-		position.x = position.x + 1;
-	}
 }
 
 function place() {
@@ -164,6 +149,23 @@ function bottomIndex() {
 		}
 	}
 	return bottomest + position.y;
+}
+
+function moveRight() {
+	var validMove = true;
+	for (var i = 0; i < 4; i++) {
+		for (var j = 0; j < 4; j++) {
+			if (collidesWithWalls(1)) {
+				validMove = false;
+			}
+			if (collision(1)) {
+				validMove = false;
+			}
+		}
+	}
+	if (validMove) {
+		position.x = position.x + 1;
+	}
 }
 
 function moveLeft() {

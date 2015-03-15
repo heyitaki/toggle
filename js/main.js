@@ -49,7 +49,7 @@ jQuery(function($) {
 				break;
 
 			case Keys.W:
-			case Keys.Left:
+			case Keys.Up:
 				rotateClockwise();
 				break;
 		}
