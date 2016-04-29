@@ -56,8 +56,14 @@ jQuery(function($) {
 	});
 
 	mainGame.setUpCanvas();
-	setInterval(function() {
-		naturalFall();
-	}, 3000);
-	setInterval(tick, 2);
+	var fall = setInterval(naturalFall, 1000);
+	var inc = setInterval(gameStep, 2);
+
+	function gameStep() {
+		tick();
+		if (isGameOver()) {
+			clearInterval(fall);
+			clearInterval(inc);
+		}
+	}
 });
