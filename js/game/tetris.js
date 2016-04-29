@@ -3,7 +3,7 @@ var rotation = 0;
 var blockType = 0;
 
 var position = {
-	x: 0,
+	x: 3,
 	y: 0
 };
 
@@ -77,7 +77,7 @@ function collision(direction) {
 			if (subField[k][j].hasTetris) {
 				var index = j + position.x + (k + position.y + 1) * mainGame.grid.width + direction;
 				if (index < mainGame.grid.width * mainGame.grid.height && mainGame.grid.squares[index].hasTetris) {
-						return true;
+					return true;
 				}
 			}
 		}
@@ -86,7 +86,7 @@ function collision(direction) {
 	return false;
 }
 
-function collidesWithWalls(direction) {
+/*function collidesWithWalls(direction) {
 	for (var j = 0; j < 4; j++) {
 		for (var k = 0; k < 4; k++) {
 			if (subField[k][j].hasTetris) {
@@ -97,6 +97,19 @@ function collidesWithWalls(direction) {
 		}
 	}
 
+	return false;
+}*/
+
+function collidesWithWalls(direction) {
+	for (var j = 0; j < 4; j++) {
+		for (var k = 0; k < 4; k++) {
+			if (subField[k][j].hasTetris) {
+				if (position.x + leftMostIndex() + direction < 0 || position.x + rightMostIndex() + direction >= this.mainGame.grid.width) {
+					return true;
+				}
+			}
+		}
+	}
 	return false;
 }
 
@@ -110,45 +123,46 @@ function place() {
 		}
 	}
 	clearField();
-	position.x = 0;
+	position.x = 3;
 	position.y = 0;
 	createNextBlock();
 }
 
-function leftestIndex() {
-	var leftest = 3;
+function leftMostIndex() {
+	var index = 4;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && i < leftest) {
-				leftest = i;
+			if (subField[j][i].hasTetris && i < index) {
+				index = i;
 			}
 		}
 	}
-	return leftest;
+	$("#score").html(index);
+	return index;
 }
 
-function rightestIndex() {
-	var rightest = 8;
+function rightMostIndex() {
+	var index = -1;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && i > rightest) {
-				rightest = i;
+			if (subField[j][i].hasTetris && i > index) {
+				index = i;
 			}
 		}
 	}
-	return rightest;
+	return index;
 }
 
 function bottomIndex() {
-	var bottomest = 1;
+	var index = 1;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (subField[i][j].hasTetris && j > bottomest) {
-				bottomest = j;
+			if (subField[j][i].hasTetris && j > index) {
+				index = j;
 			}
 		}
 	}
-	return bottomest + position.y;
+	return index + position.y;
 }
 
 function moveRight() {
@@ -157,8 +171,7 @@ function moveRight() {
 		for (var j = 0; j < 4; j++) {
 			if (collidesWithWalls(1)) {
 				validMove = false;
-			}
-			if (collision(1)) {
+			} else if (collision(1)) {
 				validMove = false;
 			}
 		}
@@ -405,4 +418,12 @@ function clearField() {
 			subField[j][k].hasTetris = false;
 		}
 	}
+}
+
+function isGameOver() {
+	var highest = highestBlock();
+	if (0 <= highest && highest < 2 * this.mainGame.grid.width) {
+		return true;
+	}
+	return false;
 }
