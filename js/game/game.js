@@ -89,7 +89,7 @@ var WordFuncs = {
 		return word;
 	},
 	isWord: function(dictionary, word) {
-		return dictionary.indexOf(word) !== -1;
+		return dictionary.indexOf(" " + word + " ") !== -1;
 	}
 };
 
