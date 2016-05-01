@@ -90,17 +90,11 @@ GameGrid.prototype.draw = function(ctx) {
 			ctx.font = "30px sans-serif";
 			ctx.textAllign = "center";
 
-			var special = false;
-
-			if (square.hasTetris) {
-				ctx.fillStyle = "#000000";
-				special = true;
-			}
 			if (square.isSelected) {
 				ctx.fillStyle = square.selectedColor;
-				special = true;
-			}
-			if (!special) {
+			} else if (square.hasTetris) {
+				ctx.fillStyle = "#000000";
+			} else {
 				ctx.fillStyle = square.color;
 			}
 

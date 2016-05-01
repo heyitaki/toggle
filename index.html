@@ -6,16 +6,21 @@
 		<title>Tetrament</title>
 		<link rel="stylesheet" href="css/style.css" />
 		<script src="js/vendor/jquery-1.11.3.min.js"></script>
+		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<script src="js/game/legal-dictionary.js"></script>
 		<script src="js/game/input.js"></script>
 		<script src="js/game/game-grid.js"></script>
 		<script src="js/game/game-square.js"></script>
 		<script src="js/game/game.js"></script>
 		<script src="js/game/tetris.js"></script>
+		<script src="js/elements.js"></script>
 		<script src="js/main.js"></script>
 	</head>
 	<body>
 		<canvas id="game-canvas"></canvas>
-		<span><strong><div id="score">0</div></strong></span>
+		<div id="score-align">
+			<div id="score-box"><div id="score-tag">SCORE:&nbsp</div><span><div id="score">00000</div></span></div>
+			<div id="hiscore-box">HIGHSCORES: </div>
+		</div>
 	</body>
 </html>

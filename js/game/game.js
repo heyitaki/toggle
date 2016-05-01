@@ -62,6 +62,7 @@ Game.prototype.clearWord = function() {
 
 Game.prototype.updateScore = function() {
 	var word = WordFuncs.constructWord(this.wordLetters);
+	var wordScore = 0;
 
 	if (WordFuncs.isWord(legalDict, word) &&
 			this.wordsFound.indexOf(word) === -1) {
@@ -70,11 +71,12 @@ Game.prototype.updateScore = function() {
 		for (var i = 0; i < this.wordLetters.length; i++) {
 			var letter = this.wordLetters[i].letter;
 			var asciiCode = letter.charCodeAt(0);
-			this.score += this.alphabetPoints[asciiCode - 65];
+			wordScore += this.alphabetPoints[asciiCode - 65];
 		}
-		this.score *= this.wordLetters.length;
+		wordScore *= this.wordLetters.length;
+		this.score += wordScore;
 
-		$("#score").html(this.score);
+		updateScore(this.score);
 	}
 };
 
@@ -82,13 +84,8 @@ var WordFuncs = {
 	constructWord: function(gameLetters) {
 		var word = "";
 		for (var i = 0; i < gameLetters.length; i++) {
-			if (i === 0) {
-				word += gameLetters[i].letter;
-			} else {
-				word += gameLetters[i].letter.toLowerCase();
-			}
+			word += gameLetters[i].letter.toLowerCase();
 		}
-
 		return word;
 	},
 	isWord: function(dictionary, word) {

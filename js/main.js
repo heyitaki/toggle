@@ -3,7 +3,7 @@ jQuery(function($) {
 	mainGame = new Game();
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
-
+	
 	intializeBlockArray();
 	createNextBlock();
 

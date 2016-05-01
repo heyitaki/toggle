@@ -4,7 +4,7 @@ var blockType = 0;
 
 var position = {
 	x: 3,
-	y: 0
+	y: -2
 };
 
 function intializeBlockArray() {
@@ -39,10 +39,10 @@ function createNextBlock() {
 		subField[2][1].hasTetris = true;
 		subField[2][2].hasTetris = true;
 	} else if (i === 2) { // I
-		subField[3][0].hasTetris = true;
-		subField[3][1].hasTetris = true;
-		subField[3][2].hasTetris = true;
-		subField[3][3].hasTetris = true;
+		subField[2][0].hasTetris = true;
+		subField[2][1].hasTetris = true;
+		subField[2][2].hasTetris = true;
+		subField[2][3].hasTetris = true;
 	} else if (i === 3) { // T
 		subField[2][0].hasTetris = true;
 		subField[2][1].hasTetris = true;
@@ -77,35 +77,9 @@ function collision(direction) {
 			if (subField[k][j].hasTetris) {
 				var index = j + position.x + (k + position.y + 1) * mainGame.grid.width + direction;
 				if (index < mainGame.grid.width * mainGame.grid.height && mainGame.grid.squares[index].hasTetris) {
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
-}
-
-/*function collidesWithWalls(direction) {
-	for (var j = 0; j < 4; j++) {
-		for (var k = 0; k < 4; k++) {
-			if (subField[k][j].hasTetris) {
-				if (position.x + direction < leftestIndex() - 1 || position.x + direction > rightestIndex() - 1) {
-					return true;
-				}
-			}
-		}
-	}
-
-	return false;
-}*/
-
-function collidesWithWalls(direction) {
-	for (var j = 0; j < 4; j++) {
-		for (var k = 0; k < 4; k++) {
-			if (subField[k][j].hasTetris) {
-				if (position.x + leftMostIndex() + direction < 0 || position.x + rightMostIndex() + direction >= this.mainGame.grid.width) {
-					return true;
+					return true; //collision with wall
+				} else if (position.x + leftMostIndex() + direction < 0 || position.x + rightMostIndex() + direction >= this.mainGame.grid.width) {
+					return true; //collision with tile(s)
 				}
 			}
 		}
@@ -124,7 +98,7 @@ function place() {
 	}
 	clearField();
 	position.x = 3;
-	position.y = 0;
+	position.y = -2;
 	createNextBlock();
 }
 
@@ -137,7 +111,6 @@ function leftMostIndex() {
 			}
 		}
 	}
-	$("#score").html(index);
 	return index;
 }
 
@@ -169,9 +142,7 @@ function moveRight() {
 	var validMove = true;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (collidesWithWalls(1)) {
-				validMove = false;
-			} else if (collision(1)) {
+			if (collision(1)) {
 				validMove = false;
 			}
 		}
@@ -185,12 +156,9 @@ function moveLeft() {
 	var validMove = true;
 	for (var i = 0; i < 4; i++) {
 		for (var j = 0; j < 4; j++) {
-			if (collidesWithWalls(-1)) {
-				validMove = false;
-			} else if (collision(-1)) {
+			if (collision(-1)) {
 				validMove = false;
 			}
-
 		}
 	}
 	if (validMove) {
@@ -233,182 +201,182 @@ function tetris() {
 			if (!mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris) {
 				isTetris = false;
 			}
+			if (isTetris) {
+				rowTetris = i;
+			}
+			
 		}
 		if (isTetris) {
-			rowTetris = i;
-		}
-	}
-	if (isTetris) {
-		for (var j = 0; j < mainGame.grid.width; j++) {
-			mainGame.grid.squares[rowTetris * mainGame.grid.width + j].hasTetris = false;
-		}
-
-		for (var i = rowTetris - 1; i >= 0; i--) {
 			for (var j = 0; j < mainGame.grid.width; j++) {
-				if (mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris) {
-					mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris = false;
-					mainGame.grid.squares[(i + 1) * mainGame.grid.width + j].hasTetris = true;
+				mainGame.grid.squares[rowTetris * mainGame.grid.width + j].hasTetris = false;
+			}
+
+			for (var i = rowTetris - 1; i >= 0; i--) {
+				for (var j = 0; j < mainGame.grid.width; j++) {
+					if (mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris) {
+						mainGame.grid.squares[i * mainGame.grid.width + j].hasTetris = false;
+						mainGame.grid.squares[(i + 1) * mainGame.grid.width + j].hasTetris = true;
+					}
 				}
 			}
+			mainGame.score += 133;
+			updateScore(mainGame.score);
 		}
-		mainGame.score += 133;
-		$("#score").html(mainGame.score);
+		isTetris = false;
 	}
 }
 
 function rotateClockwise() {
 	clearField();
-
 	if (rotation % 360 === 0) {
-		if (blockType === 1) {
+		if (blockType === 1) { //O
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 2) {
+		} else if (blockType === 2) { //I
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[3][1].hasTetris = true;
-		} else if (blockType === 3) {
+		} else if (blockType === 3) { //T
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 4) {
+		} else if (blockType === 4) { //L
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 5) {
+		} else if (blockType === 5) { //J
 			subField[0][1].hasTetris = true;
 			subField[0][2].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 6) {
+		} else if (blockType === 6) { //S
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 7) {
+		} else if (blockType === 7) { //Z
 			subField[0][2].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
 		}
 	} else if (rotation % 360 === 90) {
-		if (blockType ===  1) {
+		if (blockType ===  1) { //O
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 2) {
-			subField[3][0].hasTetris = true;
-			subField[3][1].hasTetris = true;
-			subField[3][2].hasTetris = true;
-			subField[3][3].hasTetris = true;
-		} else if (blockType === 3) {
+		} else if (blockType === 2) { //I
+			subField[2][0].hasTetris = true;
+			subField[2][1].hasTetris = true;
+			subField[2][2].hasTetris = true;
+			subField[2][3].hasTetris = true;
+		} else if (blockType === 3) { //T
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 4) {
+		} else if (blockType === 4) { //L
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][0].hasTetris = true;
-		} else if (blockType === 5) {
+		} else if (blockType === 5) { //J
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 6) {
+		} else if (blockType === 6) { //S
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 7) {
+		} else if (blockType === 7) { //Z
 			subField[2][2].hasTetris = true;
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
 		}
 	} else if (rotation % 360 === 180) {
-		if (blockType ===  1) {
+		if (blockType ===  1) { //O
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 2) {
+		} else if (blockType === 2) { //I
 			subField[0][2].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][2].hasTetris = true;
 			subField[3][2].hasTetris = true;
-		} else if (blockType === 3) {
+		} else if (blockType === 3) { //T
 			subField[0][1].hasTetris = true;
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 4) {
+		} else if (blockType === 4) { //L
 			subField[0][0].hasTetris = true;
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 5) {
+		} else if (blockType === 5) { //J
 			subField[0][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 6) {
+		} else if (blockType === 6) { //S
 			subField[0][0].hasTetris = true;
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
-		} else if (blockType === 7) {
+		} else if (blockType === 7) { //Z
 			subField[0][1].hasTetris = true;
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][0].hasTetris = true;
 		}
 	} else if (rotation % 360 === 270) {
-		if (blockType === 1) {
+		if (blockType === 1) { //O
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 2) {
-			subField[3][0].hasTetris = true;
-			subField[3][1].hasTetris = true;
-			subField[3][2].hasTetris = true;
-			subField[3][3].hasTetris = true;
-		} else if (blockType === 3) {
+		} else if (blockType === 2) { //I
+			subField[2][0].hasTetris = true;
+			subField[2][1].hasTetris = true;
+			subField[2][2].hasTetris = true;
+			subField[2][3].hasTetris = true;
+		} else if (blockType === 3) { //T
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
 			subField[1][1].hasTetris = true;
-		} else if (blockType === 4) {
+		} else if (blockType === 4) { //L
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
 			subField[1][2].hasTetris = true;
-		} else if (blockType === 5) {
+		} else if (blockType === 5) { //J
 			subField[1][0].hasTetris = true;
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
-		} else if (blockType === 6) {
+		} else if (blockType === 6) { //S
 			subField[2][0].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[1][2].hasTetris = true;
-		} else if (blockType === 7) {
+		} else if (blockType === 7) { //Z
 			subField[1][0].hasTetris = true;
 			subField[1][1].hasTetris = true;
 			subField[2][1].hasTetris = true;
 			subField[2][2].hasTetris = true;
 		}
 	}
-
 	rotation = rotation + 90;
 }
 
@@ -422,8 +390,19 @@ function clearField() {
 
 function isGameOver() {
 	var highest = highestBlock();
-	if (0 <= highest && highest < 2 * this.mainGame.grid.width) {
+	if (0 <= highest && highest < this.mainGame.grid.width) {
 		return true;
 	}
 	return false;
+}
+
+function formatScore(score) {
+	if (score < 10000) {
+		score = ("00000" + score).slice(-5);
+	}
+	return score;
+}
+
+function updateScore(score) {
+	$("#score").html(formatScore(score));
 }
