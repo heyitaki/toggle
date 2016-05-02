@@ -3,7 +3,7 @@ jQuery(function($) {
 	mainGame = new Game();
 	mainGame.canvasOffsetX = canvasOffset.left;
 	mainGame.canvasOffsetY = canvasOffset.top;
-	
+
 	intializeBlockArray();
 	createNextBlock();
 
@@ -28,7 +28,8 @@ jQuery(function($) {
 		"Left": 37,
 		"Right": 39,
 		"Down": 40,
-		"Up": 38
+		"Up": 38,
+		"Space": 32
 	};
 
 	$(window).on("keydown", function(e) {
@@ -51,6 +52,10 @@ jQuery(function($) {
 			case Keys.W:
 			case Keys.Up:
 				rotateClockwise();
+				break;
+
+			case Keys.Space:
+				instantDrop();
 				break;
 		}
 	});

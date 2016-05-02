@@ -168,20 +168,23 @@ function moveLeft() {
 
 function naturalFall() {
 	var validMove = true;
-	for (var i = 0; i < 4; i++) {
-		for (var j = 0; j < 4; j++) {
-			if (collision(0)) {
-				validMove = false;
-				place();
-			}
-		}
+	if (collision(0)) {
+		validMove = false;
+		place();
+		return true;
 	}
 	if (validMove) {
 		if (bottomIndex() > mainGame.grid.height - 2) {
 			place();
+			return true;
 		}
 		this.position.y++;
 	}
+	return false;
+}
+
+function instantDrop() {
+	while(!naturalFall()) {}
 }
 
 function tetris() {
