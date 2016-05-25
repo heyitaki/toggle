@@ -15,4 +15,4 @@ Control the falling pieces with the WASD or arrow keys. As your pieces fall to t
 
 Don't let the blocks reach the top of the screen!
 
-[Test out the game here.](http://akshaths.github.io/Tetrament/)
+[Test out the game here.](http://akshaths.github.io/Toggle/)
