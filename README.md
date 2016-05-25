@@ -24,4 +24,7 @@ Don't let the blocks reach the top of the screen!
 * implement multiplayer functionality (similar to Wordament rounds/leaderboard)
 * dynamic letter insertions, insert new row of letters at the top of the board when user clears a row
 
+###LICENSE
+The code is released under the [MIT license](https://github.com/akshaths/Toggle/blob/master/LICENSE).
+
 
