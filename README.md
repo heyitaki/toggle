@@ -10,12 +10,12 @@ Control the falling pieces with the WASD or arrow keys. As your pieces fall to t
 Don't let the blocks reach the top of the screen!
 
 ###CONTROLS
-``W / ↑`` - rotate piece clockwise  
-``A / ←`` - move piece left  
-``S / ↓`` - move piece downwards  
-``D / →`` - move piece right  
-``Space`` - instant drop  
-``Mouse`` - click and drag to form words 
+``W / ↑`` · rotate piece clockwise  
+``A / ←`` · move piece left  
+``S / ↓`` · move piece downwards  
+``D / →`` · move piece right  
+``Space`` · instant drop  
+``Mouse`` · click and drag to form words 
 
 ###NEXT STEPS
 * record demo to showcase gameplay
