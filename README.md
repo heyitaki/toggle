@@ -18,7 +18,8 @@ Don't let the blocks reach the top of the screen!
 ``Mouse``: Click and drag to form words 
 
 ###NEXT STEPS
-* add demo to showcase gameplay
+* record demo to showcase gameplay
+* add pause and game over screens
 * add local highscores list
 * implement multiplayer functionality (similar to Wordament rounds/leaderboard)
 * dynamic letter insertions, insert new row of letters at the top of the board when user clears a row
