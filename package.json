@@ -21,7 +21,8 @@
   "dependencies": {
     "@babel/polyfill": "^7.6.0",
     "core-js": "^3.2.1",
-    "esm": "^3.2.25"
+    "esm": "^3.2.25",
+    "gh-pages": "^2.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
